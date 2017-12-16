@@ -10,6 +10,7 @@ import { ExpenseService } from 'app/admin-view/shared/expense.service';
 import { ExpenseData } from 'app/admin-view/models/expenseData';
 import { SIDEBAR_TOGGLE_DIRECTIVES } from 'app/admin-view/commons/sidebar.directive';
 import { ResultData } from 'app/admin-view/models/result';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-daily-expense-table',
@@ -60,6 +61,10 @@ export class DailyExpenseTableComponent implements OnInit {
     this._expenseService.getExpenseData().subscribe(data => {
       this.expenses = data;
       console.log(this.expenses);
+      for (let i = 0; i < this.expenses.length; i++) {
+        this.expenses[i].Date = moment(this.expenses[i].Date).format('YYYY-MM-DD');
+      }
+      // this.expenses[0].Date = moment(this.expenses[0].Date).format('YYYY-MM-DD');
       this.loading = false;
     });
   }
@@ -171,13 +176,11 @@ export class DailyExpenseTableComponent implements OnInit {
   }
 
   editExpenseData(id: number) {
-    console.log(id);
     this.flag = true;
     var result = this.expenses.filter(function (expense) {
       return expense.serverId === id;
     });
     this._expenseService.storageEl = result[0];
-    console.log(result[0]);
     this.router.navigate(['/pages/candidatedailyexpense']);
   }
 
@@ -302,4 +305,15 @@ export class DailyExpenseTableComponent implements OnInit {
   // checkData(id) {
   //   this._expenseService.storageEl.splice
   // }
+
+  _keyPress(event: any) {
+    const pattern = /[0-9]/;
+    let inputChar = String.fromCharCode(event.charCode);
+
+    if (!pattern.test(inputChar)) {
+      // invalid character, prevent input
+      event.preventDefault();
+    }
+  }
+
 }

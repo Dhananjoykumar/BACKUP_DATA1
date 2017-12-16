@@ -1,7 +1,7 @@
 export class FundDetails {
     Address: string;
     Amount: number;
-    CheckNo: number;
+    CheckNo: string;
     CheckDate: string;
     CreatedBy: string;  
     CreatedDate: string;
@@ -14,11 +14,13 @@ export class FundDetails {
     IMEINo: string;
     IsActive: number;
     MobileNo: string;
+    MobId: number;
     ModifyBy: string;
     ModifyDate: string;
     ModifiedBy: string;
     ModifiedDate: string;
     PaidBy: number;
+    PaidByText: string;
     ProviderBankName: string;
     ProviderMobileNo: string;
     ProviderName: string;

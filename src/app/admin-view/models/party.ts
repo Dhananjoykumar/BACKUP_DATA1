@@ -8,5 +8,4 @@ export class AddParty {
     ContactPersonMobile: string;
     MobileNo: string;
     TokenId: string;
-    Status: string;
 }

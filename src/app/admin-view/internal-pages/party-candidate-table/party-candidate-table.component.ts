@@ -34,4 +34,9 @@ export class PartyCandidateTableComponent implements OnInit {
       result[0].IsActive = '0';
     }
   }
+
+  addNewCandidate() {
+    this.router.navigateByUrl('/pages/addpartycandidate');
+  }
+
 }

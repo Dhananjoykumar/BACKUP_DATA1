@@ -6,6 +6,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { StateList } from 'app/admin-view/models/stateList';
 import { DistrictList } from 'app/admin-view/models/districtList';
 import { Router } from '@angular/router';
+import { LocalBody } from 'app/admin-view/models/localbody';
 
 @Component({
   selector: 'app-upload-standard-rates',
@@ -21,6 +22,7 @@ export class UploadStandardRatesComponent implements OnInit {
   distList: DistrictList[] = new Array<DistrictList>();
   expense: ExpenseData[] = new Array<ExpenseData>();
   subExp: ExpenseData[] = new Array<ExpenseData>();
+  localBodyList: LocalBody[] = new Array<LocalBody>();
 
   constructor(private _localBody: LocalBodyService, private _expService: ExpenseService,
     private _fb: FormBuilder, private router: Router) {
@@ -78,6 +80,18 @@ export class UploadStandardRatesComponent implements OnInit {
     // console.log(stdRate);
     this._expService.uploadStdRate(stdRate);
     this.formInit({});
+  }
+
+  onLocalBodyTypeChange() {
+    const stateId = this.uploadStdRates.controls['StateId'].value;
+    const distId = this.uploadStdRates.controls['DistId'].value;
+    const localBodyType = this.uploadStdRates.controls['LocalBodyType'].value;
+    console.log(stateId);
+
+    this._localBody.downloadLocalBody(+stateId, +distId, +localBodyType).subscribe(data => {
+      this.localBodyList = data;
+      console.log(data);
+    });
   }
 
   _keyPress(event: any) {

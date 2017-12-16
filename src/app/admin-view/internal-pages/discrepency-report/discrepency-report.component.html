@@ -1,0 +1,260 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header">
+          <strong>Discripency Report</strong>
+        </div>
+        <div class="card-block">
+          <form novalidate [formGroup]="discripencyReport" (ngSubmit)="searchDiscripencyReport(discripencyReport.value)" class="form-horizontal ">
+            <div class="form-group row">
+              <label class="col-md-2 form-control-label" for="districtname-input">State Name</label>
+              <label class="col-md-2 form-control-label" for="districtname-input">District Name</label>
+              <label class="col-md-2 form-control-label" for="localbodyname-input">LocalBody Type</label>
+              <label class="col-md-2 form-control-label" for="localbodyname-input">LocalBody Name</label>
+              <label class="col-md-2 form-control-label" for="date-input">Ward</label>
+            </div>
+            <div class="form-group row" id="field-space-text">
+              <div class="col-md-2">
+                <select id="selectState" name="selectState" class="form-control" size="1" (change)="onStateChange()" formControlName="StateId">
+                  <option value="">Select State</option>
+                  <option *ngFor="let s of stateList" [value]="s.StateId">{{s.StateName}}</option>
+                </select>
+                <div class="alert" *ngIf="!discripencyReport.controls['StateId'].valid && discripencyReport.controls['StateId'].touched">{{titleAlert}}</div>
+              </div>
+              <div class="col-md-2">
+                <select id="selectDistrictName" name="selectDistrictName" class="form-control" size="1" formControlName="DistId">
+                  <option value="">Please Select</option>
+                  <option *ngFor="let district of distList;let i = index" [value]="district.DistId">{{district.DistName}}</option>
+                </select>
+                <div class="alert" *ngIf="!discripencyReport.controls['DistId'].valid && discripencyReport.controls['DistId'].touched">{{titleAlert}}</div>
+              </div>
+              <div class="col-md-2">
+                <select id="selectLocalBodyType" name="selectLocalBodyType" class="form-control" size="1" (change)="onLocalBodyTypeChange()"
+                  formControlName="LocalBodyType">
+                  <option value="">Please Select</option>
+                  <option value="1">Municipal Corporation</option>
+                  <option value="2">Municipal Council</option>
+                  <option value="3">Nagar Panchayat</option>
+                  <option value="4">Zilla Parishad</option>
+                  <option value="5">Panchayat Samiti</option>
+                </select>
+                <div class="alert" *ngIf="!discripencyReport.controls['LocalBodyType'].valid && discripencyReport.controls['LocalBodyType'].touched">{{titleAlert}}</div>
+              </div>
+              <div class="col-md-2">
+                <select id="selectLocalBody" name="selectLocalBody" class="form-control" size="1" formControlName="LocalBodyId">
+                  <option value="">Please Select</option>
+                  <option *ngFor="let localBody of localBodyList;let i = index" [value]="localBody.LocalBodyId">{{localBody.LocalBodyName}}</option>
+                </select>
+                <div class="alert" *ngIf="!discripencyReport.controls['LocalBodyId'].valid && discripencyReport.controls['LocalBodyId'].touched">{{titleAlert}}</div>
+              </div>
+              <div class="col-md-2">
+                <input type="text" id="unit-input" name="unit-input" class="form-control" formControlName="WardNo" placeholder="Enter Ward No.">
+                <div class="alert" *ngIf="!discripencyReport.controls['WardNo'].valid && discripencyReport.controls['WardNo'].touched">{{titleAlert}}</div>
+              </div>
+            </div>
+            <div class="text-right">
+              <button type="submit" class="btn btn-sm btn-success" [disabled]="!discripencyReport.valid">
+                <!-- (click)="searchReportData()" -->
+                <i class="fa fa-dot-circle-o"></i> Submit</button>
+              <button type="submit" class="btn btn-sm btn-warning">
+                <!-- (click)="searchReportData()" -->
+                <i class="fa fa-ban"></i> Reset</button>
+              <button type="reset" class="btn btn-sm btn-danger" (click)="cancelData()">
+                <i class="fa fa-close"></i> Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-header">
+        <i class="fa fa-align-justify"></i> Report Data
+      </div>
+      <div class="card-block" id="deviation">
+        <table class="table table-bordered table-striped table-condensed">
+          <thead>
+            <tr>
+              <th>Candidate Name</th>
+              <th>Candidate Mobile No.</th>
+              <th>Ward No.</th>
+              <th>Local Body Name</th>
+              <th>Total Fund</th>
+              <th>Total Party Fund</th>
+              <th>Discrepency</th>
+              <th>View</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>
+                <i class="fa fa-eye fa-lg mt-4" (click)="showData(myModal)" title="View"></i>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <ul class="pagination">
+          <pagination-controls (pageChange)="page = $event" id="1" style="cursor:pointer;" maxSize="5" directionLinks="true" autoHide="true">
+          </pagination-controls>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div bsModal #myModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card" id="divProformaData">
+            <div class="card-header">
+              <div align="Center" style="font-size: large; font-weight: bold">Discrepancy Details Reports</div>
+            </div>
+            <div class="card-block">
+              <div style="height: 9px"></div>
+              <div style="height: 9px"></div>
+              <div style="border: groove">
+                <table style="width: 100%;">
+                  <tr>
+                    <td class="auto-style1">Total Expense :</td>
+                    <td>
+                      <!-- <span id="MainContent_lblcandidateName">{{extraDetails.FullName}}</span> -->
+                    </td>
+                    <td class="auto-style2">Mobile No. :</td>
+                    <td>
+                      <!-- <span id="MainContent_lblDistrictNm">{{extraDetails.DistName}}</span> -->
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="auto-style1">Candidate Role :</td>
+                    <td>
+                      <!-- <span id="MainContent_lblParty">{{extraDetails.PartyName}}</span> -->
+                    </td>
+                    <td class="auto-style2">Party Name:</td>
+                    <td>
+                      <!-- <span id="MainContent_lblElection">{{extraDetails.ElectionTypeName}}</span> -->
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="auto-style1">Seat No. :</td>
+                    <td>
+                      <!-- <span id="MainContent_lblLocalBodyId">{{extraDetails.LocalBodyName}}</span> -->
+                    </td>
+                    <td class="auto-style2">Ward No. :</td>
+                    <td>
+                      <!-- <span id="MainContent_lblVotingDate">{{extraDetails.ElectionDate}}</span> -->
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="auto-style1">Election Type :</td>
+                    <td>
+                      <!-- <span id="MainContent_lblWardNo">{{extraDetails.WardNo}}</span> -->
+                    </td>
+                    <td class="auto-style2">Local Body Name:</td>
+                    <td>
+                      <!-- <span id="MainContent_lblExpenseDate">{{currDate}}</span> -->
+                    </td>
+                  </tr>
+                </table>
+              </div>
+              <div style="height: 9px"></div>
+              <div style="height: 9px"></div>
+              <div style="border: groove">
+                <div class="form-group row">
+                  <div class="col-md-2">Total Expense :</div>
+                  <div class="col-md-2"></div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-md-2">Total Expense By Self :</div>
+                  <div class="col-md-2"></div>
+                  <div class="col-md-2">Total Expense By Party :</div>
+                  <div class="col-md-2"></div>
+                  <div class="col-md-2">Total Expense By Other :</div>
+                  <div class="col-md-2"></div>
+                </div>
+              </div>
+              <div style="height: 9px"></div>
+              <div style="height: 9px"></div>
+              <table class="table table-bordered" id="dataTable">
+                <thead>
+                  <th>ID</th>
+                  <th>Date</th>
+                  <th>Expense Type</th>
+                  <th>Sub Expense Type</th>
+                  <th>Qty</th>
+                  <th>Rate</th>
+                  <th>Pay Mode</th>
+                  <th>Deviation</th>
+                  <th>Total Expense</th>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tbody>
+              </table>
+              <div style="height: 9px"></div>
+              <div style="height: 9px"></div>
+              <div style="border: groove">
+                <div class="form-group row">
+                  <div class="col-md-2">Total Fund :</div>
+                  <div class="col-md-2"></div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-md-2">Total Expense Self :</div>
+                  <div class="col-md-2"></div>
+                  <div class="col-md-2">Total Expense Party :</div>
+                  <div class="col-md-2"></div>
+                  <div class="col-md-2">Total Expense Supporter :</div>
+                  <div class="col-md-2"></div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-md-2">Total Expense Relative :</div>
+                  <div class="col-md-2"></div>
+                  <div class="col-md-2">Total Expense Friend :</div>
+                  <div class="col-md-2"></div>
+                  <div class="col-md-2">Total Expense Well Wisher :</div>
+                  <div class="col-md-2"></div>
+                </div>
+              </div>
+              <div style="height: 9px"></div>
+              <div style="height: 9px"></div>
+              <div style="border: groove">
+                <div class="form-group row">
+                  <div class="col-md-2">Total Party Expense :</div>
+                  <div class="col-md-2"></div>
+                </div>
+              </div>
+              <div style="height: 9px"></div>
+
+              <div style="height: 9px"></div>
+              <div style="height: 9px"></div>
+              <div class="col-md-5">
+                <button type="button" id="btnPrint" class="btn btn-primary" (click)="Print()">Back</button>
+                <button type="button" id="btnPrint" class="btn btn-primary" (click)="Print()">Send Notice</button>
+              </div>
+              <div class="col-md-5">
+              </div>
+              <div class="col-md-2"></div>
+            </div>
+          </div>
+        </div>
+      </div>

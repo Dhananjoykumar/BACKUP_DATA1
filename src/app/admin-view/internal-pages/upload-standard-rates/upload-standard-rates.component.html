@@ -29,7 +29,7 @@
                 <div class="alert" *ngIf="!uploadStdRates.controls['DistId'].valid && uploadStdRates.controls['DistId'].touched">{{titleAlert}}</div>
               </div>
               <div class="col-md-4">
-                <select id="localbodytype" name="localbodytype" class="form-control" size="1" formControlName="LocalBodyType">
+                <select id="localbodytype" name="localbodytype" class="form-control" size="1" formControlName="LocalBodyType" (change)="onLocalBodyTypeChange()">
                   <option value="">Select Local Body Type</option>
                   <option value="1">Municipal Corporation</option>
                   <option value="2">Municipal Council</option>
@@ -50,20 +50,7 @@
                 <select id="selectExpenseHead" name="selectExpenseHead" class="form-control" size="1" formControlName="LocalBodyId">
                   <!-- (change)="onExpenseChange()" -->
                   <option value="">Select Value</option>
-                  <option value="1">Hadgaon nagar parishad</option>
-                  <option value="2">Ardhapur Nagar Panchayat</option>
-                  <option value="3">Mudkhed Nagar Parishad</option>
-                  <option value="4">Umri Nagar Parishad</option>
-                  <option value="5">Dharmabad Nagar Parishad</option>
-                  <option value="6">Biloli Municipal Council</option>
-                  <option value="7">Kundalwadi Nagar Parishad</option>
-                  <option value="8">Kandhar Municipal Council</option>
-                  <option value="9">Mukhed Nagar Parishad</option>
-                  <option value="10">Degloor Nagar Parishad</option>
-                  <option value="11">Mahur Nagar Panchayat</option>
-                  <option value="12">Nanded Zilla Parishad</option>
-                  <option value="13">Kinwat Zilla Parishad</option>
-                  <option value="14">Nanded Corporation</option>
+                  <option *ngFor="let localBody of localBodyList" [value]="localBody.LocalBodyId">{{localBody.LocalBodyName}}</option>
                 </select>
                 <div class="alert" *ngIf="!uploadStdRates.controls['LocalBodyId'].valid && uploadStdRates.controls['LocalBodyId'].touched">{{titleAlert}}</div>
               </div>
@@ -114,11 +101,11 @@
               </div>
             </div>
             <div class="text-right">
-              <button type="submit" class="btn btn-sm btn-primary" *ngIf="isEditable == false" [disabled]="!uploadStdRates.valid">
+              <button type="submit" class="btn btn-sm btn-success" *ngIf="isEditable == false" [disabled]="!uploadStdRates.valid">
                 <i class="fa fa-dot-circle-o"></i> Submit</button>
-              <button type="submit" *ngIf="isEditable == true" class="btn btn-sm btn-primary" [disabled]="!uploadStdRates.valid">
+              <button type="submit" *ngIf="isEditable == true" class="btn btn-sm btn-success" [disabled]="!uploadStdRates.valid">
                 <i class="fa fa-dot-circle-o"></i> Update</button>
-              <button type="reset" class="btn btn-sm btn-danger" *ngIf="isEditable == false">
+              <button type="reset" class="btn btn-sm btn-warning" *ngIf="isEditable == false">
                 <i class="fa fa-ban"></i> Reset</button>
               <button type="reset" class="btn btn-sm btn-danger" (click)="cancelData()">
                 <i class="fa fa-close"></i> Cancel</button>

@@ -29,17 +29,13 @@ import { PartyFundTableComponent } from './party-fund-table/party-fund-table.com
 import { AddPartyCandidateComponent } from './add-party-candidate/add-party-candidate.component';
 import { PartyCandidateTableComponent } from './party-candidate-table/party-candidate-table.component';
 import { UploadStandardRatesComponent } from './upload-standard-rates/upload-standard-rates.component';
-import { PartyAdditionComponent } from 'app/admin-view/internal-pages/party-addition/party-addition.component';
-import { PartyTableComponent } from 'app/admin-view/internal-pages/party-table/party-table.component';
-import { PartyRepresentativeComponent } from 'app/admin-view/internal-pages/party-representative/party-representative.component';
-import { PartyRepresentativeTableComponent } from 'app/admin-view/internal-pages/party-representative-table/party-representative-table.component';
-import { UploadDownloadExpenseComponent } from 'app/admin-view/internal-pages/upload-download-expense/upload-download-expense.component';
-import { OtpPasswordComponent } from './otp-password/otp-password.component';
-import { AddOffersComponent } from './add-offers/add-offers.component';
-import { VoterStatusReportComponent } from './voter-status-report/voter-status-report.component';
-import { AddOffersTableComponent } from './add-offers-table/add-offers-table.component';
-import { DetailsReportCountComponent } from './details-report-count/details-report-count.component';
-
+import { DynamicMessagingComponent } from './dynamic-messaging/dynamic-messaging.component';
+import { NominationDailyComponent } from './nomination-daily/nomination-daily.component';
+import { NominationReportsComponent } from './nomination-reports/nomination-reports.component';
+import { AddNewsComponent } from './add-news/add-news.component';
+import { AddNewsTableComponent } from './add-news-table/add-news-table.component';
+import { DiscrepencyReportComponent } from 'app/admin-view/internal-pages/discrepency-report/discrepency-report.component';
+import { ExpenseReportComponent } from 'app/admin-view/internal-pages/expense-report/expense-report.component';
 @NgModule({
     imports: [
         InternalPagesRoutingModule,
@@ -75,16 +71,13 @@ import { DetailsReportCountComponent } from './details-report-count/details-repo
         AddPartyCandidateComponent,
         PartyCandidateTableComponent,
         UploadStandardRatesComponent,
-        PartyAdditionComponent,
-        PartyTableComponent,
-        PartyRepresentativeComponent,
-        PartyRepresentativeTableComponent,
-        UploadDownloadExpenseComponent,
-        OtpPasswordComponent,
-        AddOffersComponent,
-        VoterStatusReportComponent,
-        AddOffersTableComponent,
-        DetailsReportCountComponent
+        DynamicMessagingComponent,
+        NominationDailyComponent,
+        NominationReportsComponent,
+        AddNewsComponent,
+        AddNewsTableComponent,
+        DiscrepencyReportComponent,
+        ExpenseReportComponent
     ]
 })
 export class InternalPagesModule { }

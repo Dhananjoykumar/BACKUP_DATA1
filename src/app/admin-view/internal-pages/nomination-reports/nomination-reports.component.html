@@ -1,0 +1,158 @@
+<div class="animated fadeIn">
+  <!--/.row-->
+  <div class="row">
+    <!-- <div class="col-sm-1"></div> -->
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header">
+          <strong>SEC Report</strong>
+        </div>
+        <div class="card-block">
+          <form novalidate [formGroup]="nominationReport" (ngSubmit)="searchReportData(nominationReport.value)" class="form-horizontal ">
+            <!-- action="" method="post" enctype="multipart/form-data" -->
+            <div class="form-group row">
+              <label class="col-md-6 form-control-label" for="districtname-input">State Name</label>
+              <label class="col-md-6 form-control-label" for="districtname-input">District Name</label>
+            </div>
+            <div class="form-group row" id="field-space-text">
+              <div class="col-md-6">
+                <select id="selectState" name="selectState" class="form-control" size="1" (change)="onStateChange()" formControlName="StateId">
+                  <option value="">Select State</option>
+                  <option *ngFor="let s of stateList" [value]="s.StateId">{{s.StateName}}</option>
+                </select>
+                <div class="alert" *ngIf="!nominationReport.controls['StateId'].valid && nominationReport.controls['StateId'].touched">{{titleAlert}}</div>
+              </div>
+              <div class="col-md-6">
+                <select id="selectDistrictName" name="selectDistrictName" class="form-control" size="1" formControlName="DistId">
+                  <option value="">Please Select</option>
+                  <option *ngFor="let district of distList;let i = index" [value]="district.DistId">{{district.DistName}}</option>
+                </select>
+                <div class="alert" *ngIf="!nominationReport.controls['DistId'].valid && nominationReport.controls['DistId'].touched">{{titleAlert}}</div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-6 form-control-label" for="localbodyname-input">LocalBody Type</label>
+              <label class="col-md-6 form-control-label" for="localbodyname-input">LocalBody Name</label>
+            </div>
+            <div class="form-group row" id="field-space-text">
+              <div class="col-md-6">
+                <select id="selectLocalBodyType" name="selectLocalBodyType" class="form-control" size="1" (change)="onLocalBodyTypeChange()"
+                  formControlName="LocalBodyTypeId">
+                  <!-- [(ngModel)]="expense.ExpensesType" -->
+                  <!-- (change)="onExpenseChange()" -->
+                  <option value="">Please Select</option>
+                  <option value="1">Municipal Corporation</option>
+                  <option value="2">Zilla Parishad</option>
+                  <option value="3">Panchayat Samiti</option>
+                </select>
+                <div class="alert" *ngIf="!nominationReport.controls['LocalBodyTypeId'].valid && nominationReport.controls['LocalBodyTypeId'].touched">{{titleAlert}}</div>
+              </div>
+              <div class="col-md-6">
+                <select id="selectLocalBody" name="selectLocalBody" class="form-control" size="1" formControlName="LocalBodyId">
+                  <!-- (change)="onSubExpenseChange()" -->
+                  <!-- [(ngModel)]="expense.SubExpenseType" -->
+                  <option value="">Please Select</option>
+                  <option *ngFor="let localBody of localBodyName;let i = index" [value]="localBody.LocalBodyId">{{localBody.LocalBodyName}}</option>
+                </select>
+                <div class="alert" *ngIf="!nominationReport.controls['LocalBodyId'].valid && nominationReport.controls['LocalBodyId'].touched">{{titleAlert}}</div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-6 form-control-label" for="date-input">Field</label>
+            </div>
+            <div class="form-group row" id="field-space-text">
+              <div class="col-md-6">
+                <select id="selectReportType" name="selectReportType" class="form-control" size="1" formControlName="ReportType">
+                  <!-- [(ngModel)]="expense.ExpensesType" -->
+                  <!-- (change)="onExpenseChange()" -->
+                  <option value="">Please Select</option>
+                  <option value="1">All</option>
+                  <option value="2">Submitted</option>
+                  <option value="3">Final</option>
+                  <option value="4">Withdrawal Status</option>
+                  <option value="5">Rejected</option>
+                  <option value="6">RO Check</option>
+                </select>
+                <div class="alert" *ngIf="!nominationReport.controls['ReportType'].valid && nominationReport.controls['ReportType'].touched">{{titleAlert}}</div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-6 form-control-label" for="fromdate">From Date</label>
+              <label class="col-md-6 form-control-label" for="todate">To Date</label>
+            </div>
+            <div class="form-group row" id="field-space-text">
+              <div class="col-md-6">
+                <input type="date" name="fromdate" id="fromdate" class="form-control" formControlName="FromDate">
+                <!-- [(ngModel)]="expense.StandardRate" -->
+              </div>
+              <div class="col-md-6">
+                <input type="date" name="todate" id="todate" class="form-control" formControlName="ToDate">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 form-control-label">Total Count:</label>
+              <label class="col-md-3 form-control-label"></label>
+              <label class="col-md-3 form-control-label">Last Sent Message Id:</label>
+              <label class="col-md-3 form-control-label"></label>
+            </div>
+            <div class="text-right">
+              <button type="submit" class="btn btn-sm btn-success" [disabled]="!nominationReport.valid">
+                <!-- (click)="searchReportData()" -->
+                <i class="fa fa-dot-circle-o"></i> Submit</button>
+              <button type="submit" class="btn btn-sm btn-success" [disabled]="!nominationReport.valid">
+                <!-- (click)="searchReportData()" -->
+                <i class="fa fa-dot-circle-o"></i> Export to Excel</button>
+              <button type="reset" class="btn btn-sm btn-danger" (click)="cancelData()">
+                <i class="fa fa-close"></i> Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-header">
+        <i class="fa fa-align-justify"></i> Report Data
+      </div>
+      <div class="card-block" id="deviation">
+        <table class="table table-bordered table-striped table-condensed">
+          <thead>
+            <tr>
+              <th>First Name</th>
+              <th>Middle Name</th>
+              <th>Last Name</th>
+              <th>Mobile No.</th>
+              <th>Nomination Id</th>
+              <th>District Name</th>
+              <th>Form Type</th>
+              <th>Ward Id</th>
+              <th>Localbody Name</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+        <ul class="pagination">
+          <pagination-controls (pageChange)="page = $event" id="1" style="cursor:pointer;" maxSize="5" directionLinks="true" autoHide="true">
+          </pagination-controls>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

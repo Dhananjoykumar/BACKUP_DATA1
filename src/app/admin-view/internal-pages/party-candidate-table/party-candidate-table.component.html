@@ -4,12 +4,12 @@
         <div class="card-header">
           <!-- <i class="fa fa-align-justify"></i>  -->
           Party Candidate List
-          <button type="submit" class="btn btn-sm btn-primary" id="btnAddNewFund" (click)="addNewFund()"> Add New Party Candidate</button>
+          <button type="submit" class="btn btn-sm btn-primary" id="btnAddNewFund" (click)="addNewCandidate()"> Add New Party Candidate</button>
         </div>
         <div class="card-block">
           <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
-          <table class="table  table-bordered table-condensed table table-hover">
-            <thead id="theadStyle">
+          <table class="table table-bordered table-striped table-condensed">
+            <thead>
               <tr>
                 <th>Id</th>
                 <th>Party Type</th>
@@ -31,7 +31,7 @@
             </thead>
             <tbody>
               <tr *ngFor="let candidate of candidateList | paginate: {itemsPerPage: 5, currentPage:page, id: '1'};let i = index">
-                <td>{{candidate.Id}}</td>
+                <td>{{candidate.FundID}}</td>
                 <td>{{candidate.PartyTypeText}}</td>
                 <td>{{candidate.PartyNameText}}</td>
                 <td>{{candidate.DistName}}</td>

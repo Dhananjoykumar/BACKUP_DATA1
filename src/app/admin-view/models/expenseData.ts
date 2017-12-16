@@ -47,6 +47,8 @@ export class ExpenseData {
     Qty_Size_Area: number;
     Rate: number;
     ReffrenceMobile: string;
+    ReportType: number;
+    ReportTypeText: string;
     SourceOfExpense: number;
     StandardRate: number;
     StateId: number;

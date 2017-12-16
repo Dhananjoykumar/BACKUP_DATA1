@@ -120,13 +120,13 @@
             </div>
             <!-- <div class="card-footer"> -->
             <div class="text-right">
-              <button type="submit" class="btn btn-sm btn-primary" *ngIf="isEditable == false" [disabled]="!partyFundCollection.valid">
+              <button type="submit" class="btn btn-sm btn-success" *ngIf="isEditable == false" [disabled]="!partyFundCollection.valid">
                 <!-- (click)="insertFundDetail()" -->
                 <i class="fa fa-dot-circle-o"></i> Submit</button>
-              <button type="submit" *ngIf="isEditable == true" class="btn btn-sm btn-primary" [disabled]="!partyFundCollection.valid">
+              <button type="submit" *ngIf="isEditable == true" class="btn btn-sm btn-success" [disabled]="!partyFundCollection.valid">
                 <!-- (click)="updateFundDetail()" -->
                 <i class="fa fa-dot-circle-o"></i> Update</button>
-              <button type="reset" class="btn btn-sm btn-danger" *ngIf="isEditable == false">
+              <button type="reset" class="btn btn-sm btn-warning" *ngIf="isEditable == false">
                 <i class="fa fa-ban"></i> Reset</button>
               <button type="reset" class="btn btn-sm btn-danger" (click)="cancelData()">
                 <i class="fa fa-close"></i> Cancel</button>
