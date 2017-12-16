@@ -1,0 +1,255 @@
+<div class="row">
+	<div class="col-lg-12">
+		<div class="card">
+			<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+			<div class="card-header">
+				<!-- <i class="fa fa-align-justify"></i>  -->
+				Control Chart
+			</div>
+			<div class="card-block">
+				<form [formGroup]="controlChartForm">
+					<div class="form-group row" *ngIf="editMode == true">
+						<label for="ACNO" class="col-md-1 form-control-label" *ngIf="split == true"> Ac No</label>
+						<label for="PartNo" class="col-md-1 form-control-label" *ngIf="split == true"> Part No</label>
+						<label for="WardNo" class="col-md-1 form-control-label" *ngIf="split == true"> Ward No</label>
+						<label for="Id" class="col-md-1 form-control-label" *ngIf="split == true"> ID</label>
+						<label for="FromUser" class="col-sm-2 form-control-label" *ngIf="split == true"> From User</label>
+						<label for="ToUser" class="col-sm-2 form-control-label" *ngIf="split == true"> To User</label>
+						<label for="CreateDate" class="col-sm-2 form-control-label" *ngIf="split == true"> From Date</label>
+						<label for="CreateDate" class="col-sm-2 form-control-label" *ngIf="split == true"> To Date</label>
+						<label for="Id" class="col-md-1 form-control-label" *ngIf="split == false"> ID</label>
+						<label for="splitFrom" class="col-md-1 form-control-label" *ngIf="split == false"> Split From</label>
+						<label for="splitTo" class="col-md-1 form-control-label" *ngIf="split == false"> Split To</label>
+					</div>
+					<div class="form-group row" *ngIf="editMode == true">
+						<div class="col-md-1" *ngIf="split == true">
+							<input type="text" formControlName="ACNO" id="ACNO" class="form-control" placeholder="ACNO">
+						</div>
+						<div class="col-md-1" *ngIf="split == true">
+							<input type="text" formControlName="PartNo" id="PartNo" class="form-control" placeholder="PartNo">
+						</div>
+						<div class="col-md-1" *ngIf="split == true">
+							<input type="text" formControlName="WardNo" id="WardNo" class="form-control" placeholder="WardNo">
+						</div>
+						<div class="col-md-1" *ngIf="split == true">
+							<input type="text" formControlName="Id" id="Id" class="form-control" placeholder="Id">
+						</div>
+						<div class="col-sm-2" *ngIf="split == true">
+							<input type="text" formControlName="FromUser" id="FromUser" class="form-control" placeholder="User">
+						</div>
+						<div class="col-sm-2" *ngIf="split == true">
+							<input type="text" formControlName="ToUser" id="ToUser" class="form-control" placeholder="User">
+						</div>
+						<div class="col-sm-2" *ngIf="split == true">
+							<input type="date" formControlName="FromDate" id="FromDate" class="form-control" placeholder="Date">
+						</div>
+						<div class="col-sm-2" *ngIf="split == true">
+							<input type="date" formControlName="ToDate" id="ToDate" class="form-control" placeholder="Date">
+						</div>
+						<div class="col-md-1" *ngIf="split == false">
+							<input type="text" formControlName="Id" id="Id" class="form-control" placeholder="Enter Id" disabled>
+						</div>
+						<div class="col-md-1" *ngIf="split == false">
+							<input type="text" formControlName="SplitFrom" id="SplitFrom" class="form-control" placeholder="Split From">
+						</div>
+						<div class="col-md-1" *ngIf="split == false">
+							<input type="text" formControlName="SplitTo" id="SplitTo" class="form-control" placeholder="Split To">
+						</div>
+						<div class="col-md-3" *ngIf="split == true">
+							<br>
+							<br>
+							<button class="btn btn-sm btn-primary" type="submit" id="search" (click)="searchChartControl()">Search Data</button>
+						</div>
+						<div class="col-md-3" *ngIf="split == false">
+							<button class="btn btn-sm btn-primary" type="submit" id="split" (click)="splitData()">Split Data</button>
+						</div>
+					</div>
+					<div class="form-group row" *ngIf="editMode == false">
+						<label for="Id" class="col-md-3 form-control-label"> Id</label>
+						<label for="ACNO" class="col-md-3 form-control-label"> Ac No</label>
+						<label for="PartNo" class="col-md-3 form-control-label"> Part No</label>
+						<label for="WardNo" class="col-md-3 form-control-label"> Ward No</label>
+					</div>
+					<div class="form-group row" *ngIf="editMode == false">
+						<div class="col-md-3">
+							<input type="text" formControlName="Id" id="Id" class="form-control" placeholder="Enter Id" disabled>
+						</div>
+						<div class="col-md-3">
+							<input type="text" formControlName="ACNO" id="ACNO" class="form-control" placeholder="Enter AC NO">
+						</div>
+						<div class="col-md-3">
+							<input type="text" formControlName="PartNo" id="PartNo" class="form-control" placeholder="Enter PartNo">
+						</div>
+						<div class="col-md-3">
+							<input type="text" formControlName="WardNo" id="WardNo" class="form-control" placeholder="Enter WardNo">
+						</div>
+					</div>
+					<div class="form-group row" *ngIf="editMode == false">
+						<label for="CreateDate" class="col-md-3 form-control-label"> Create Date</label>
+						<label for="CreatedBy" class="col-md-3 form-control-label"> Created By</label>
+						<label for="Latitude" class="col-md-3 form-control-label"> Latitude</label>
+						<label for="Longitude" class="col-md-3 form-control-label"> Longitude</label>
+					</div>
+					<div class="form-group row" *ngIf="editMode == false">
+						<div class="col-md-3">
+							<input type="text" formControlName="CreateDate" id="CreateDate" class="form-control" placeholder="Enter Creat Date" disabled>
+						</div>
+						<div class="col-md-3">
+							<input type="text" formControlName="CreatedBy" id="CreatedBy" class="form-control" placeholder="Enter Created By" disabled>
+						</div>
+						<div class="col-md-3">
+							<input type="text" formControlName="Latitude" id="Latitude" class="form-control" placeholder="Enter Latitude" disabled>
+						</div>
+						<div class="col-md-3">
+							<input type="text" formControlName="Longitude" id="Longitude" class="form-control" placeholder="Enter Longitude" disabled>
+						</div>
+					</div>
+					<div class="form-group row" *ngIf="editMode == false">
+						<label for="BoothNo" class="col-md-3 form-control-label"> Booth No</label>
+						<label for="SectionNo" class="col-md-3 form-control-label"> Section No</label>
+						<label for="SrNoFrom" class="col-md-3 form-control-label"> SrNo From</label>
+						<label for="SrNoTo" class="col-md-3 form-control-label"> SrNo To</label>
+					</div>
+					<div class="form-group row" *ngIf="editMode == false">
+						<div class="col-md-3">
+							<input type="text" formControlName="BoothNo" id="BoothNo" class="form-control" placeholder="Enter Booth No">
+						</div>
+						<div class="col-md-3">
+							<input type="text" formControlName="SectionNo" id="SectionNo" class="form-control" placeholder="Enter Section No">
+						</div>
+						<div class="col-md-3">
+							<input type="text" formControlName="SrNoFrom" id="SrNoFrom" class="form-control" placeholder="Enter SrNo From" disabled>
+						</div>
+						<div class="col-md-3">
+							<input type="text" formControlName="SrNoTo" id="SrNoTo" class="form-control" placeholder="Enter SrNo To" disabled>
+						</div>
+					</div>
+					<div class="form-group row" *ngIf="editMode == false">
+						<label for="FromUser" class="col-md-3 form-control-label"> From User</label>
+						<label for="ToUser" class="col-md-3 form-control-label"> To User</label>
+						<label for="SplitFrom" class="col-md-3 form-control-label"> Split From</label>
+						<label for="SplitTo" class="col-md-3 form-control-label"> Split To</label>
+					</div>
+					<div class="form-group row" *ngIf="editMode == false">
+						<div class="col-md-3">
+							<input type="text" formControlName="FromUser" id="FromUser" class="form-control" placeholder="Enter From User" disabled>
+						</div>
+						<div class="col-md-3">
+							<input type="text" formControlName="ToUser" id="ToUser" class="form-control" placeholder="Enter To User" disabled>
+						</div>
+						<div class="col-md-3">
+							<input type="text" formControlName="SplitFrom" id="SplitFrom" class="form-control" placeholder="Enter Split From" disabled>
+						</div>
+						<div class="col-md-3">
+							<input type="text" formControlName="SplitTo" id="SplitTo" class="form-control" placeholder="Enter Split To" disabled>
+						</div>
+					</div>
+					<div class="form-group row" *ngIf="editMode == false">
+						<label for="Status" class="col-md-3 form-control-label"> Status</label>
+						<label for="UpdatedBy" class="col-md-3 form-control-label"> Updated By</label>
+						<label for="Voters" class="col-md-3 form-control-label"> Voters</label>
+						<label for="vstatus" class="col-md-3 form-control-label"> voter's status</label>
+					</div>
+					<div class="form-group row" *ngIf="editMode == false">
+						<div class="col-md-3">
+							<input type="text" formControlName="Status" id="Status" class="form-control" placeholder="Enter Status" disabled>
+						</div>
+						<div class="col-md-3">
+							<input type="text" formControlName="UpdatedBy" id="UpdatedBy" class="form-control" placeholder="Enter Updated By" disabled>
+						</div>
+						<div class="col-md-3">
+							<input type="text" formControlName="Voters" id="Voters" class="form-control" placeholder="Enter Voters" disabled>
+						</div>
+						<div class="col-md-3">
+							<select id="select" name="select" formControlName="vstatus" class="form-control">
+								<option value="0">Please select</option>
+								<option value="1">Present</option>
+								<option value="2">Absent</option>
+								<option value="3">Shifted</option>
+								<option value="4">Dead</option>
+								<option value="5">Deleted</option>
+								<option value="6">Double/Duubar</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group row" *ngIf="editMode == false">
+					</div>
+					<div class="form-group row" *ngIf="editMode == false">
+						<div class="col-md-9">
+						</div>
+						<div class="col-md-3" *ngIf="split == true">
+							<button class="btn btn-sm btn-primary" type="submit" (click)="updateControlChart()">Update</button>
+							<button class="btn btn-sm btn-danger" type="submit">Clear</button>
+						</div>
+					</div>
+
+
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="col-lg-12" id="div-scroll">
+		<table class="table table-striped table-bordered table-condensed" *ngIf="editMode == true">
+			<thead>
+				<tr>
+					<th>Select</th>
+					<th>ACNO</th>
+					<th>BoothNo</th>
+					<th>CreateDate</th>
+					<th>CreatedBy</th>
+					<th>FromUser</th>
+					<th>Id</th>
+					<th>PartNo</th>
+					<th>Latitude</th>
+					<th>Longitude</th>
+					<th>SectionNo</th>
+					<th>SplitFrom</th>
+					<th>SrNoFrom</th>
+					<th>SrNoTo</th>
+					<th>Status</th>
+					<th>ToUser</th>
+					<th>UpdatedBy</th>
+					<th>Voters</th>
+					<th>WardNo</th>
+					<th>vstatus</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let  data of chartsdata | paginate: {itemsPerPage: 5, currentPage:page, id: '1'}; let i = index">
+					<td>
+						<input type="checkbox" name="check" (change)="check(data.Id)" />&nbsp;</td>
+					<td>{{data.ACNO}}</td>
+					<td>{{data.BoothNo}}</td>
+					<td>{{data.CreateDate | date:"MM/dd/yyyy"}}</td>
+					<td>{{data.CreatedBy}}</td>
+					<td>{{data.FromUser}}</td>
+					<td>{{data.Id}}</td>
+					<td>{{data.PartNo}}</td>
+					<td>{{data.Latitude}}</td>
+					<td>{{data.Longitude}}</td>
+					<td>{{data.SectionNo}}</td>
+					<td>{{data.SplitFrom}}</td>
+					<td>{{data.SrNoFrom}}</td>
+					<td>{{data.SrNoTo}}</td>
+					<td>{{data.Status}}</td>
+					<td>{{data.ToUser}}</td>
+					<td>{{data.UpdatedBy}}</td>
+					<td>{{data.Voters}}</td>
+					<td>{{data.WardNo}}</td>
+					<td>{{data.vstatus}}</td>
+					<td>
+						<button type="button" *ngIf="editMode == true" class="fa fa-edit fa-lg mt-4" (click)="isEdit(i)" title="Edit"></button>
+						<button type="button" *ngIf="data.IsActive == 0" type="submit" (click)="isActive(i)" class="fa fa-check fa-lg mt-4" title="IsActive"></button>
+						<button type="button" *ngIf="data.IsActive == 1" type="submit" (click)="isDeactive(i)" class="fa fa-close fa-lg mt-4" title="IsDeactive"></button>
+						<button type="button" *ngIf="split == true" class="fa fa-plus-square fa-lg mt-4" (click)="isSplit(i)" title="Split"></button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<ul class="pagination" *ngIf="editMode == true">
+			<pagination-controls (pageChange)="page = $event" style="cursor:pointer" id="1" maxSize="10" directionLinks="true" autoHide="true">
+			</pagination-controls>
+		</ul>
+	</div>
+</div>

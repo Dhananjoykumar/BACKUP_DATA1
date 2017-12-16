@@ -1,0 +1,135 @@
+<div class="animated fadeIn">
+  <!--/.row-->
+  <div class="row">
+    <!-- <div class="col-sm-1"></div> -->
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header">
+          <strong>Fund Collection Details</strong>
+        </div>
+        <div class="card-block">
+          <form novalidate [formGroup]="fundCollection" (ngSubmit)="insertFundDetail(fundCollection.value)" class="form-horizontal">
+            <!-- action="" method="post" enctype="multipart/form-data" -->
+            <div class="form-group row">
+              <label class="col-md-4 form-control-label" for="date-input">Date</label>
+            </div>
+            <div class="form-group row" id="field-space-text">
+              <div class="col-md-4">
+                <input type="date" id="date-input" name="date-input" class="form-control" formControlName="Date">
+                <div class="alert" *ngIf="!fundCollection.controls['Date'].valid && fundCollection.controls['Date'].touched">{{titleAlert}}</div>
+                <!-- [(ngModel)]="model.FDate" *ngIf="isEditable == false" -->
+                <!-- <input type="date" id="date-input" *ngIf="isEditable == true" [(ngModel)]="model2.FDate" name="date-input" class="form-control"> -->
+                <!-- <span class="help-block">This is a help text</span> -->
+              </div>
+              <!-- <input type="text" (ngModel)="fundDetail.FundId" [ngModel]="tempFund.FundId" hidden #Id> -->
+            </div>
+            <div class="form-group row">
+              <label class="col-md-4 form-control-label" for="selectFrom">From</label>
+              <label class="col-md-4 form-control-label" for="selectFundType">Select Fund Type</label>
+              <label class="col-md-4 form-control-label" for="selectPaidBy">Paid By</label>
+            </div>
+            <div class="form-group row" id="field-space-text">
+              <div class="col-md-4">
+                <select id="selectFrom" name="selectFrom" class="form-control" size="1" formControlName="FromWhom" (change)="onSelectFromItem()">
+                  <!-- *ngIf="isEditable == false" [(ngModel)]="model.From" -->
+                  <option value="">Please Select From</option>
+                  <option value="1">Self</option>
+                  <option value="2">Party</option>
+                  <option value="3">Supporter</option>
+                  <option value="4">Relative</option>
+                  <option value="5">Friend</option>
+                  <option value="6">Well Wisher</option>
+                </select>
+                <div class="alert" *ngIf="!fundCollection.controls['FromWhom'].valid && fundCollection.controls['FromWhom'].touched">{{titleAlert}}</div>
+                <!-- <select id="selectFrom" name="selectFrom" class="form-control" size="1" *ngIf="isEditable == true" [(ngModel)]="model2.From" (change)="onSelectFromItem()">
+                      <option value="0">Please Select From</option>
+                      <option value="1">Self</option>
+                      <option value="2">Party</option>
+                      <option value="3">Supporter</option>
+                      <option value="4">Relative</option>
+                      <option value="5">Friend</option>
+                      <option value="6">Well Wisher</option>
+                    </select> -->
+              </div>
+              <div class="col-md-4">
+                <select id="selectFundType" name="selectFundType" class="form-control" size="1" formControlName="FundType">
+                  <!-- *ngIf="isEditable == false" [(ngModel)]="model.FundType" -->
+                  <option value="">Please Select Fund Type</option>
+                  <option value="1">Donation</option>
+                  <option value="2">Gift</option>
+                  <option value="3">Loan</option>
+                  <option value="4">Other</option>
+                  <option value="5">Cash In Hand</option>
+                </select>
+                <div class="alert" *ngIf="!fundCollection.controls['FundType'].valid && fundCollection.controls['FundType'].touched">{{titleAlert}}</div>
+              </div>
+              <div class="col-md-4">
+                <select id="selectPaidBy" name="selectPaidBy" class="form-control" size="1" formControlName="PaidBy" (change)="onSelectPaidBy()">
+                  <option value="">Please Select Paid By</option>
+                  <option value="1">Cash</option>
+                  <option value="2">Cheque</option>
+                  <option value="3">Other</option>
+                </select>
+                <div class="alert" *ngIf="!fundCollection.controls['PaidBy'].valid && fundCollection.controls['PaidBy'].touched">{{titleAlert}}</div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-4 form-control-label" for="amount-input">Amount</label>
+              <label class="col-md-4 form-control-label" for="chequedetails-input" id="chequedetails-label">Cheque No./Other Details</label>
+              <label class="col-md-4 form-control-label" for="bankname-input" id="bankname-label">Provider's Bank Name</label>
+            </div>
+            <div class="form-group row" id="field-space-text">
+              <div class="col-md-4">
+                <input type="text" id="amount-input" name="amount-input" class="form-control" formControlName="Amount" placeholder="Enter Amount"
+                  (keypress)="_keyPress($event)">
+                <div class="alert" *ngIf="!fundCollection.controls['Amount'].valid && fundCollection.controls['Amount'].touched">{{titleAlert}}</div>
+              </div>
+              <div class="col-md-4">
+                <input type="text" id="chequedetails-input" name="chequedetails-input" class="form-control" formControlName="CheckNo" placeholder="Enter Cheque No./Other Details">
+              </div>
+              <div class="col-md-4">
+                <input type="text" id="bankname-input" name="bankname-input" class="form-control" formControlName="ProviderBankName" placeholder="Enter Provider's Bank Name">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-4 form-control-label" for="providername-input" id="providername-label">Provider Name</label>
+              <label class="col-md-4 form-control-label" for="providermobno-input" id="providermobno-label">Mobile No.</label>
+              <label class="col-md-2 form-control-label" for="address-input">Address</label>
+            </div>
+            <div class="form-group row" id="field-space-text">
+              <div class="col-md-4">
+                <input type="text" id="providername-input" name="providername-input" class="form-control" formControlName="ProviderName"
+                  placeholder="Enter Provider Name">
+              </div>
+              <div class="col-md-4">
+                <input type="text" id="providermobno-input" name="providermobno-input" maxlength="10" class="form-control" formControlName="ProviderMobileNo"
+                  placeholder="Enter Mobile No." (keypress)="_keyPress($event)">
+              </div>
+              <div class="col-md-4">
+                <input type="text" id="address-input" name="address-input" rows="9" class="form-control" formControlName="Address" placeholder="Please Enter Address Here...">
+                <div class="alert" *ngIf="!fundCollection.controls['Address'].valid && fundCollection.controls['Address'].touched">{{titleAlert}}</div>
+                <!-- *ngIf="isEditable == false" [(ngModel)]="model.address" -->
+                <!-- <input type="text" id="address-input" name="address-input" rows="9" class="form-control" *ngIf="isEditable == true" [(ngModel)]="model2.address" placeholder="Please Enter Address Here..."> -->
+              </div>
+            </div>
+            <!-- <div class="card-footer"> -->
+            <div class="text-right">
+              <button type="submit" class="btn btn-sm btn-primary" *ngIf="isEditable == false" [disabled]="!fundCollection.valid">
+                <!-- (click)="insertFundDetail()" -->
+                <i class="fa fa-dot-circle-o"></i> Submit</button>
+              <button type="submit" *ngIf="isEditable == true" class="btn btn-sm btn-primary" [disabled]="!fundCollection.valid">
+                <!-- (click)="updateFundDetail()" -->
+                <i class="fa fa-dot-circle-o"></i> Update</button>
+              <button type="reset" class="btn btn-sm btn-danger" *ngIf="isEditable == false" [disabled]="!fundCollection.valid">
+                <i class="fa fa-ban"></i> Reset</button>
+              <button type="reset" class="btn btn-sm btn-danger" (click)="cancelData()">
+                <i class="fa fa-close"></i> Cancel</button>
+            </div>
+            <!-- </div> -->
+          </form>
+        </div>
+
+      </div>
+    </div>
+    <!-- <div class="col-sm-1"></div> -->
+  </div>

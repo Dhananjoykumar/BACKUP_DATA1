@@ -1,0 +1,185 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-sm-6 col-md-12">
+      <div class="card" id="divProformaData">
+        <div class="card-header">
+          <div style="height: 9px"></div>
+          <div align="Center" style="font-size: large; font-weight: bold">नमुना-५</div>
+          <div style="height: 9px"></div>
+          <div align="Center" style="font-size: small; font-weight: bold">(सदर विवरणपत्र निकाल लागल्या पासून २० दिवसाच्या आत सादर करावे)</div>
+          <div align="Center" style="font-size: large; font-weight: bold">राजकीय पक्ष - उमेदवारांची यादी</div>
+        </div>
+        <div class="card-block">
+          <div style="height: 9px"></div>
+          <div style="height: 9px"></div>
+          <div style="border: groove">
+            <table style="width: 100%;">
+              <tr>
+                <td class="auto-style1">पक्षाचे नाव :</td>
+                <td>
+                  <span id="MainContent_lblcandidateName">{{extraDetails.PartyName}}</span>
+                </td>
+                <td class="auto-style2">जिल्ह्याचे नाव :</td>
+                <td>
+                  <span id="MainContent_lblDistrictNm">{{extraDetails.DistName}}</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="auto-style1">स्थानिक स्वराज्य संस्थेचे नाव :</td>
+                <td>
+                  <span id="MainContent_lblParty">{{extraDetails.LocalBodyName}}</span>
+                </td>
+                <td class="auto-style2">सार्वत्रिक निवडणूक \पोट निवडणूक :</td>
+                <td>
+                  <span id="MainContent_lblElection">{{extraDetails.ElectionTypeName}}</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="auto-style1">एकूण लढविलेल्या जागा :</td>
+                <td>
+                  <!-- <span id="MainContent_lblLocalBodyId">{{extraDetails.LocalBodyName}}</span> -->
+                </td>
+                <td class="auto-style2">मतदानाचा दिनांक:</td>
+                <td>
+                  <span id="MainContent_lblVotingDate">{{extraDetails.ElectionDate}}</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="auto-style2">दिनांक:</td>
+                <td>
+                  <span id="MainContent_lblExpenseDate">{{currDate}}</span>
+                </td>
+                <td class="auto-style2">&nbsp;</td>
+                <td>
+                  <span id="MainContent_Label9"></span>
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div style="height: 9px"></div>
+          <div style="height: 9px"></div>
+          <table class="table table-bordered" id="dataTable">
+            <thead>
+              <tr>
+                <th>अ.क्</th>
+                <th>स्थानिक स्वराज्य सस्थेचे नाव</th>
+                <th>प्रभाग /गट</th>
+                <th>जागा / seat क्र</th>
+                <th>उमेदवाराचे नाव</th>
+                <th>छाननीत वैध/अवैध</th>
+                <th>माघार घेतली/ घेतली नाही</th>
+                <th>विजयी/ पराभूत</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- <tr *ngFor="let activeData of activeFundData">
+                  <td>{{activeData.FundID}}</td>
+                  <td>{{activeData.ProviderName}}</td>
+                  <td>{{activeData.ProviderMobileNo}}</td>
+                  <td>{{activeData.Date}}</td>
+                  <td>{{activeData.PaidBy}}</td>
+                  <td>{{activeData.ProviderBankName}}</td>
+                  <td>{{activeData.FundTypeText}}</td>
+                  <td>{{activeData.Amount}}</td>
+                </tr> -->
+              <!-- <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td>एकूण</td>
+                  <td>{{totalAmount}}</td>
+                </tr> -->
+            </tbody>
+          </table>
+          <div style="height: 9px"></div>
+          <table>
+            <tr>
+              <td style="padding-left: 10px">
+                <span id="MainContent_lbldateDetails">दिनांक .............रोजी ...........वा नमुना ५ सदर करत आहे.</span>
+              </td>
+            </tr>
+            <tr>
+              <td style="height: 27px"></td>
+            </tr>
+            <tr>
+              <td style="padding-left: 10px; text-align: right">
+                <span id="MainContent_Label2">पक्षाच्या पदाधिकाऱ्यांची सही</span>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding-left: 10px; text-align: right">
+                <span id="MainContent_lblOfficerSign">(सही करणाऱ्याचे नाव, पद)</span>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding-left: 10px; text-align: right">
+                <span id="MainContent_Label3">पक्षाचे नाव </span>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding-left: 10px">
+                <span id="MainContent_lblDailyExpenseSample">सदर नमुना ५, दिनांक .............रोजी प्राप्त झाला.</span>
+              </td>
+            </tr>
+            <tr>
+              <td style="height: 27px"></td>
+            </tr>
+            <tr>
+              <td style="padding-left: 10px; text-align: right">
+                <span id="MainContent_Label2">सही</span>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding-left: 10px; text-align: right">
+                <span id="MainContent_lblOfficerSign">जिल्हाधिकारी / महापालिका आयुक्त</span>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding-left: 10px; text-align: right">
+                <span id="MainContent_Label3">एवं निवडणूक अधिकारी </span>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding-left: 10px; text-align: right">
+                <span id="MainContent_Label4">स्थानिक स्वराज्य संस्था</span>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding-left: 35px">टीप :
+              </td>
+            </tr>
+            <tr>
+              <td style="padding-left: 31px">
+                <span id="MainContent_lblTip1" style="padding-left: 5px">(१) एकूण उमेदवारांची माहिती स्थानिक स्वराज्य संस्थांनिहाय नमुना 5 मध्ये, निकाल लागल्यापासून 90 दिवसाच्या
+                  आत, जिल्हाधिकारी/ महापालिका आयुक्त यांना सादर करावा. सदर नमुना त्यांच्यामार्फत छाननी होऊन राज्य निवडणूक
+                  आयोगाकडे अग्रेषित होईल याची खात्री करावी.</span>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding-left: 37px">
+                <span id="MainContent_lblTip2">(२) सादर करतेवेळी न चुकता पोहोच घ्यावी. सदर पोहोच हि भविष्यात बचावासाठी उपयोगी होऊ शकेल.
+                </span>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding-left: 37px">
+                <span id="MainContent_lblTip3">(३) ओंनलाईन पद्धतीने पक्षाच्या सर्व उमेदवाराने नामनिर्देशन पत्र भरले असल्यास सदर नमुना 5 ऑटोमॅटिक तयार होईल.
+                  पक्षाच्या पदाधिकाऱ्याने फक्त नमुना डाऊनलोड करून, तपासून, प्रिंट करून, सही करून, (१) प्रमाणे सादर करावा.</span>
+              </td>
+            </tr>
+          </table>
+          <div style="height: 9px"></div>
+          <div style="height: 9px"></div>
+          <div class="col-md-5">
+            <button type="button" id="btnPrint" class="btn btn-primary" (click)="Print()">Print</button>
+          </div>
+          <div class="col-md-2"></div>
+        </div>
+      </div>
+    </div>
+    <!--/.col-->
+  </div>
+</div>

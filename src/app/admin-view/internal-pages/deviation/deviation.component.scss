@@ -1,0 +1,36 @@
+#deviation {
+    border-right: 2px solid red;
+    width: 35%;
+}
+
+#deviation table {
+    max-width: 300px;
+    width: 80% !important;
+}
+
+.alert {
+    background: #f2edda;
+    padding: 2px;
+    font-size: .9em;
+    margin-bottom: 20px;
+    display: inline-block;
+    animation: 2s alertAnim forwards;
+}
+
+.button {
+    margin-top: 3rem;
+    
+}
+
+
+
+@keyframes alertAnim {
+    from {
+        opacity:0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity:1;
+        transform: translateY(0);
+    }
+}

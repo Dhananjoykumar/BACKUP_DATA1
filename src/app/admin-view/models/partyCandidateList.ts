@@ -1,0 +1,30 @@
+export class PartyCandidateList {
+    Id: string;
+    PartyTypeId: number;
+    PartyTypeText: string;
+    PartyNameId: number;
+    PartyNameText: string;
+    DistId: number;
+    DistName: string;
+    LocalBodyType: number;
+    LocalBodyTypeText: string;
+    LocalBodyId: number;
+    LocalBodyIdText: string;
+    ElectionTypeId: number;
+    ElectionTypeText: string;
+    ElectionDate: string;
+    CandidateName: string;
+    CandidateMoNo: string;
+    WardNo: string;
+    SeatNo: string;
+    VerifiedId: string;
+    NomiWithdrawId: string;
+    ElectionResultId: string;
+    CreatedBy: string;
+    CreatedDate: string;
+    ModifiedBy: string;
+    ModifiedDate: string;
+    IsActive: string;
+    MobileNo: string;
+    TokenId: string;
+}

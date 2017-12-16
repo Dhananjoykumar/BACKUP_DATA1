@@ -1,0 +1,141 @@
+<div class="animated fadeIn">
+  <!--/.row-->
+  <div class="row">
+    <!-- <div class="col-sm-1"></div> -->
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header">
+          <strong>Proforma 5</strong>
+        </div>
+        <div class="card-block">
+          <form novalidate [formGroup]="addPartyCandidate" (ngSubmit)="insertPartyCandidate(addPartyCandidate.value)" class="form-horizontal">
+            <div class="form-group row">
+              <label class="col-md-4 form-control-label" for="district-input" id="district-label"> District</label>
+              <label class="col-md-4 form-control-label" for="localbody-input" id="localbody-label"> Local Body</label>
+              <label class="col-md-4 form-control-label" for="localbodytype-input" id="localbodytype-label"> Local Body Type</label>
+            </div>
+            <div class="form-group row" id="field-space-text">
+              <div class="col-md-4">
+                <input type="text" id="district-input" name="district-input" class="form-control" formControlName="DistName" disabled>
+              </div>
+              <div class="col-md-4">
+                <input type="text" id="localbody-input" name="localbody-input" class="form-control" formControlName="LocalBodyIdText" disabled>
+              </div>
+              <div class="col-md-4">
+                <input type="text" id="localbodytype-input" name="localbodytype-input" class="form-control" formControlName="LocalBodyTypeText"
+                  disabled>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-4 form-control-label" for="partytype-input" id="partytype-label">Party Type</label>
+              <label class="col-md-4 form-control-label" for="partyname-input" id="partyname-label">Party Name</label>
+              <label class="col-md-4 form-control-label" for="electiontype" id="electiontype-label">Election Type</label>
+            </div>
+            <div class="form-group row" id="field-space-text">
+              <div class="col-md-4">
+                <input type="text" id="partytype-input" name="partytype-input" class="form-control" formControlName="PartyTypeText" disabled>
+              </div>
+              <div class="col-md-4">
+                <input type="text" id="partyname-input" name="partyname-input" class="form-control" formControlName="PartyNameText" disabled>
+              </div>
+              <div class="col-md-4">
+                <select id="electiontype" name="electiontype" class="form-control" size="1" formControlName="ElectionTypeId">
+                  <option value="">Please Select Election Type</option>
+                  <option value="1">सार्वत्रिक निवडणूक</option>
+                  <option value="2">पोट निवडणूक</option>
+                </select>
+                <div class="alert" *ngIf="!addPartyCandidate.controls['ElectionTypeId'].valid && addPartyCandidate.controls['ElectionTypeId'].touched">{{titleAlert}}</div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-4 form-control-label" for="wardno-input" id="wardno-label">Ward No.</label>
+              <label class="col-md-4 form-control-label" for="seatno" id="seatno-label">Seat No.</label>
+              <label class="col-md-4 form-control-label" for="electiondate-input" id="electiondate-label">Election Date</label>
+            </div>
+            <div class="form-group row" id="field-space-text">
+              <div class="col-md-4">
+                <input type="text" id="wardno-input" name="wardno-input" class="form-control" formControlName="WardNo" placeholder="Enter Ward No."
+                  (keypress)="_keyPress($event)">
+                <div class="alert" *ngIf="!addPartyCandidate.controls['WardNo'].valid && addPartyCandidate.controls['WardNo'].touched">{{titleAlert}}</div>
+              </div>
+              <div class="col-md-4">
+                <select id="seatno" name="seatno" class="form-control" size="1" formControlName="SeatNo">
+                  <option value="">Please Select Seat No.</option>
+                  <option value="1">A</option>
+                  <option value="2">B</option>
+                  <option value="3">C</option>
+                  <option value="4">D</option>
+                  <option value="5">E</option>
+                </select>
+                <div class="alert" *ngIf="!addPartyCandidate.controls['SeatNo'].valid && addPartyCandidate.controls['SeatNo'].touched">{{titleAlert}}</div>
+              </div>
+              <div class="col-md-4">
+                <input type="date" id="electiondate-input" name="electiondate-input" class="form-control" formControlName="ElectionDate"
+                  placeholder="Enter Provider's Bank Name">
+                <div class="alert" *ngIf="!addPartyCandidate.controls['ElectionDate'].valid && addPartyCandidate.controls['ElectionDate'].touched">{{titleAlert}}</div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-4 form-control-label" for="candidatename-input" id="candidatename-label">Candidate Name</label>
+              <label class="col-md-4 form-control-label" for="providermobno-input" id="providermobno-label">Verfication Status</label>
+              <label class="col-md-4 form-control-label" for="address-input">Nomination Withdrawn</label>
+            </div>
+            <div class="form-group row" id="field-space-text">
+              <div class="col-md-4">
+                <input type="text" id="candidatename-input" name="candidatename-input" class="form-control" formControlName="CandidateName"
+                  placeholder="Enter Candidate Name">
+                <div class="alert" *ngIf="!addPartyCandidate.controls['CandidateName'].valid && addPartyCandidate.controls['CandidateName'].touched">{{titleAlert}}</div>
+              </div>
+              <div class="col-md-4">
+                <label class="radio-inline" for="inline-radio1">
+                  <input type="radio" id="verified-radio" name="VerifiedId" value="Verified" formControlName="VerifiedId">Verified
+                </label>
+                <label class="radio-inline" for="inline-radio2">
+                  <input type="radio" id="notverified-radio" name="VerifiedId" value="Not Verified" formControlName="VerifiedId">Not Verified
+                </label>
+                <div class="alert" *ngIf="!addPartyCandidate.controls['VerifiedId'].valid && addPartyCandidate.controls['VerifiedId'].touched">{{titleAlert}}</div>
+              </div>
+              <div class="col-md-4">
+                <label class="radio-inline" for="inline-radio1">
+                  <input type="radio" id="yes-radio" name="NomiWithdrawId" value="Yes" formControlName="NomiWithdrawId">Yes
+                </label>
+                <label class="radio-inline" for="inline-radio2">
+                  <input type="radio" id="no-radio" name="NomiWithdrawId" value="No" formControlName="NomiWithdrawId">No
+                </label>
+                <div class="alert" *ngIf="!addPartyCandidate.controls['NomiWithdrawId'].valid && addPartyCandidate.controls['NomiWithdrawId'].touched">{{titleAlert}}</div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-4 form-control-label" for="partytype-input" id="partytype-label">Election Result Status</label>
+            </div>
+            <div class="form-group row" id="field-space-text">
+              <div class="col-md-4">
+                <label class="radio-inline" for="inline-radio1">
+                  <input type="radio" id="Won-radio" name="ElectionResultId" value="Yes" formControlName="ElectionResultId">Won
+                </label>
+                <label class="radio-inline" for="inline-radio2">
+                  <input type="radio" id="Lost-radio" name="ElectionResultId" value="No" formControlName="ElectionResultId">Lost
+                </label>
+                <div class="alert" *ngIf="!addPartyCandidate.controls['ElectionResultId'].valid && addPartyCandidate.controls['ElectionResultId'].touched">{{titleAlert}}</div>
+              </div>
+            </div>
+            <!-- <div class="card-footer"> -->
+            <div class="text-right">
+              <button type="submit" class="btn btn-sm btn-primary" *ngIf="isEditable == false" [disabled]="!addPartyCandidate.valid">
+                <!-- (click)="insertFundDetail()" -->
+                <i class="fa fa-dot-circle-o"></i> Submit</button>
+              <button type="submit" *ngIf="isEditable == true" class="btn btn-sm btn-primary" [disabled]="!addPartyCandidate.valid">
+                <!-- (click)="updateFundDetail()" -->
+                <i class="fa fa-dot-circle-o"></i> Update</button>
+              <button type="reset" class="btn btn-sm btn-danger" *ngIf="isEditable == false">
+                <i class="fa fa-ban"></i> Reset</button>
+              <button type="reset" class="btn btn-sm btn-danger" (click)="cancelData()">
+                <i class="fa fa-close"></i> Cancel</button>
+            </div>
+            <!-- </div> -->
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="col-sm-1"></div> -->
+  </div>

@@ -1,0 +1,227 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+      <div class="card-header">
+        Candidate Daily Expense
+        <button type="submit" class="btn btn-sm btn-primary" id="btnAddNewExp" (click)="addNewExpense()"> Add New Expense</button>
+      </div>
+      <div class="card-block">
+        <div class="form-group row">
+          <label for="expenseid" class="col-md-3 form-control-label"> Expense Id</label>
+          <label for="fromdate" class="col-md-3 form-control-label"> From Date</label>
+          <label for="tilldate" class="col-md-3 form-control-label"> Till Date</label>
+        </div>
+        <form novalidate (ngSubmit)="searchExpense()" id="htmlData">
+          <div class="form-group row">
+            <!-- [formGroup]="searchExpenseData" -->
+            <div class="col-md-3">
+              <input type="text" name="expenseid" id="expenseid" class="form-control" placeholder="Enter Expense Id">
+            </div>
+            <div class="col-md-3">
+              <input type="date" name="fromdate" id="fromdate" class="form-control" placeholder="From Date">
+            </div>
+            <div class="col-md-3">
+              <input type="date" name="tilldate" id="tilldate" class="form-control" placeholder="Till Date">
+            </div>
+            <div class="col-md-3">
+              <button class="btn btn-sm btn-primary " type="submit" id="search">Search Data</button>
+              <!-- (click)="searchExpense()" -->
+            </div>
+          </div>
+        </form>
+        <table class="table table-striped table-bordered">
+          <thead>
+            <tr>
+              <!-- <th>
+                <input type="checkbox" (change)="selectAll($event)" (checked)="isAllChecked()"> -->
+                <!-- <input type="checkbox" *ngIf="exp.IsPrinted == 1" name="selectAll" value="select" disabled> -->
+              <!-- </th> -->
+              <th>Id</th>
+              <th>Date</th>
+              <th>Expense Type</th>
+              <th>Sub Expense Type</th>
+              <th>Oty</th>
+              <th>Rate</th>
+              <th>Total Expense</th>
+              <th>Pay Mode</th>
+              <th>Paid Amount</th>
+              <th>Invoice No.</th>
+              <th>Firm Name</th>
+              <th>Expenses By</th>
+              <th>Enter By</th>
+              <th>
+                <span>Action</span>
+              </th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let exp of expenses | paginate: {itemsPerPage: 5, currentPage:page, id: '1'};let i = index">
+              <!-- <td><input type="checkbox" [(ngModel)]="exp.selected" name="select" (click)="checkIfAllSelected()"></td> -->
+              <!-- <td>
+                <input type="checkbox" *ngIf="exp.IsPrinted == 0" id="childCheck" [(ngModel)]="exp.state" (change)="uncheckData(exp.serverId)"> -->
+                <!-- value="{{exp.serverId}}" -->
+                <!-- <input type="checkbox" *ngIf="exp.IsPrinted == 1" id="select" name="selectAll" value="select" disabled>
+              </td> -->
+              <td>{{exp.serverId}}</td>
+              <td>{{exp.Date}}</td>
+              <td class="wraptext" id="expType" (mouseenter)="hoverData([exp.ExpensesType])">{{exp.ExpenseTypeText}}</td>
+              <td>{{exp.SubExpenseTypeText}}</td>
+              <td>{{exp.Qty_Size_Area}}</td>
+              <td>{{exp.Rate}}</td>
+              <td>{{exp.TotalExpense}}</td>
+              <td>{{exp.PaymentModeText}}</td>
+              <td>{{exp.PaidAmount}}</td>
+              <td>{{exp.InvoiceNo}}</td>
+              <td>{{exp.FirmName}}</td>
+              <td>{{exp.SourceOfExpense}}</td>
+              <td>{{exp.CandidateRole}}</td>
+              <td id="action" *ngIf="exp.IsPrinted == 0">
+
+                <!-- <button *ngIf="exp.IsApproved == 0" type="submit"> -->
+                <i *ngIf="exp.IsApproved == 0" id="approve" class="fa fa-check fa-md" (click)="approveExpense(exp.serverId)" title="Verify"></i>
+                <!-- </button> -->
+                <!-- <button *ngIf="exp.IsApproved == 1" type="submit"> -->
+                <i *ngIf="exp.IsApproved == 1" id="approve" class="fa fa-close fa-md" (click)="approveExpense(exp.serverId)" title="Reject"></i>
+                <!-- </button> -->
+
+                <!-- </td>
+              <td> -->
+
+                <!-- <span *ngIf="exp.OffAcceptStatus == 'accepted'" class="badge badge-success"><a class="fa fa-upload fa-lg mt-2" href="#"></a></span> -->
+                <!-- <button type="submit"> -->
+                <i *ngIf="exp.IsActive == 0" id="publish" class="fa fa-upload fa-md" (click)="publishExpense(exp.serverId)" title="Publish"></i>
+                <!-- </button> -->
+                <!-- <button type="submit"> -->
+                <i *ngIf="exp.IsActive == 1" id="publish" class="fa fa-trash fa-md" (click)="publishExpense(exp.serverId)" title="Discard"></i>
+                <!-- </button> -->
+
+                <!-- </td>
+              <td> -->
+
+                <!-- <button type="submit"> -->
+                <i class="fa fa-edit fa-lg mt-2" id="edit" title="Edit" (click)="editExpenseData(exp.serverId)"></i>
+                <!-- </button> -->
+
+              </td>
+              <td *ngIf="exp.IsPrinted == 1">
+                <i class="fa fa-eye fa-lg mt-4" (click)="showData(myModal,exp.serverId)" title="View"></i>
+              </td>
+              <td>
+                <span *ngIf="exp.IsApproved == 0" class="badge badge-danger">Rejected</span>
+                <span *ngIf="exp.IsApproved == 1" class="badge badge-success">Verified</span>
+                <span *ngIf="exp.IsActive == 0" class="badge badge-default">UnPublished</span>
+                <span *ngIf="exp.IsActive == 1" class="badge badge-success">Published</span>
+                <span *ngIf="exp.IsPrinted == 1" class="badge badge-warning">Printed</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <ul class="pagination">
+          <pagination-controls (pageChange)="page = $event" id="1" style="cursor:pointer;" maxSize="5" directionLinks="true" autoHide="true">
+          </pagination-controls>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!--/.col-->
+</div>
+<div bsModal #myModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Candidate Expense</h4>
+        <button type="button" class="close" (click)="myModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <!-- <form novalidate > -->
+      <div class="modal-body">
+        <form novalidate [formGroup]="editFundData">
+          <div class="form-group row">
+            <!-- <label class="col-md-4 form-control-label" for="email-input"></label> -->
+            <label class="col-md-4 form-control-label" for="date-input">Date</label>
+            <label class="col-md-4 form-control-label" for="expensetype-input" id="expensetype-label">Expense Type</label>
+            <label class="col-md-4 form-control-label" for="subexpensetype-input" id="subexpensetype-label">SubExpense Type</label>
+            <!-- *ngIf="paymenttype == 'Partial Payment'" -->
+          </div>
+          <div class="form-group row">
+            <!-- <input type="text" id="total-input" name="total-input" class="form-control" formControlName="FundID" hidden> -->
+            <div class="col-md-4">
+              <input type="date" id="date-input" name="date-input" class="form-control" formControlName="Date">
+            </div>
+            <div class="col-md-4">
+              <input type="text" id="expensetype-input" name="expensetype-input" class="form-control" formControlName="ExpenseTypeText">
+            </div>
+            <div class="col-md-4">
+              <input type="text" id="subexpensetype-input" name="subexpensetype-input" class="form-control" formControlName="SubExpenseTypeText">
+            </div>
+          </div>
+          <div class="form-group row">
+            <!-- <label class="col-md-4 form-control-label" for="email-input"></label> -->
+            <label class="col-md-4 form-control-label" for="quantity">Quantity</label>
+            <label class="col-md-4 form-control-label" for="rate" id="rate">Rate</label>
+            <label class="col-md-4 form-control-label" for="totalexpense-input" id="totalexpense-label">Total Expenses</label>
+            <!-- *ngIf="paymenttype == 'Partial Payment'" -->
+          </div>
+          <div class="form-group row">
+            <div class="col-md-4">
+              <input type="text" id="quantity" name="quantity" class="form-control" formControlName="Qty_Size_Area">
+            </div>
+            <div class="col-md-4">
+              <input type="text" id="rate" name="rate" class="form-control" formControlName="Rate">
+              <!-- [(ngModel)]="expense.Qty_Size_Area" -->
+            </div>
+            <div class="col-md-4">
+              <input type="text" id="totalexpense-input" name="totalexpense-input" class="form-control" formControlName="TotalExpense">
+              <!-- [(ngModel)]="expense.Rate" -->
+            </div>
+          </div>
+          <div class="form-group row">
+            <!-- <label class="col-md-4 form-control-label" for="email-input"></label> -->
+            <label class="col-md-4 form-control-label" for="paymentmode">Pay Mode</label>
+            <label class="col-md-4 form-control-label" for="paidamount" id="paidamount">Paid Amount</label>
+            <label class="col-md-4 form-control-label" for="invoiceno" id="invoiceno">Invoice No.</label>
+            <!-- *ngIf="paymenttype == 'Partial Payment'" -->
+          </div>
+          <div class="form-group row">
+            <div class="col-md-4">
+              <input type="text" id="paymentmode" name="paymentmode" class="form-control" formControlName="PaymentModeText">
+            </div>
+            <div class="col-md-4">
+              <input type="text" id="paidamount" name="paidamount" class="form-control" formControlName="PaidAmount">
+              <!-- [(ngModel)]="expense.Qty_Size_Area" -->
+            </div>
+            <div class="col-md-4">
+              <input type="text" id="invoiceno" name="invoiceno" class="form-control" formControlName="InvoiceNo">
+              <!-- [(ngModel)]="expense.Rate" -->
+            </div>
+          </div>
+          <div class="form-group row">
+            <!-- <label class="col-md-4 form-control-label" for="email-input"></label> -->
+            <label class="col-md-4 form-control-label" for="firmname">Firm Name</label>
+            <label class="col-md-4 form-control-label" for="partyname" id="partyname">Expenses By</label>
+            <label class="col-md-4 form-control-label" for="sourceofexpense" id="sourceofexpense">Enter By</label>
+            <!-- *ngIf="paymenttype == 'Partial Payment'" -->
+          </div>
+          <div class="form-group row">
+            <div class="col-md-4">
+              <input type="text" id="firmname" name="firmname" class="form-control" formControlName="FirmName">
+            </div>
+            <div class="col-md-4">
+              <input type="text" id="partyname" name="partyname" class="form-control" formControlName="SourceOfExpense">
+              <!-- [(ngModel)]="expense.Qty_Size_Area" -->
+            </div>
+            <div class="col-md-4">
+              <input type="text" id="sourceofexpense" name="sourceofexpense" class="form-control" formControlName="CandidateRole">
+              <!-- [(ngModel)]="expense.Rate" -->
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>

@@ -1,0 +1,73 @@
+<div class="card">
+  <div class="card-header">
+    Daily Expenses
+    <!-- <strong>Sizes</strong> -->
+  </div>
+  <div class="card-block">
+    <form novalidate [formGroup]="personalExpense" (ngSubmit)="searchExpense(personalExpense.value)">
+      <!-- action="" method="post" class="form-horizontal " -->
+      <div class="form-group row">
+        <label class="col-sm-3 form-control-label" for="input-normal">Select Date</label>
+        <div class="col-sm-6">
+          <input type="date" id="expense-date" name="expense-date" formControlName="Date" class="form-control">
+          <div class="alert" *ngIf="!personalExpense.controls['Date'].valid && personalExpense.controls['Date'].touched">{{titleAlert}}</div>
+        </div>
+      </div>
+      <div class="text-right">
+        <button type="submit" class="btn btn-sm btn-primary" [disabled]="!personalExpense.valid">
+          <i class="fa fa-dot-circle-o"></i> Show Data</button>
+        <button type="reset" class="btn btn-sm btn-danger">
+          <i class="fa fa-ban"></i> Back</button>
+        <button type="reset" class="btn btn-sm btn-danger" (click)="cancelData()">
+          <i class="fa fa-close"></i> Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+      <div class="card-header">
+        <i class="fa fa-align-justify"></i> Daily Expense Data To Print
+      </div>
+      <div class="card-block">
+        <table class="table table-bordered table-striped table-condensed">
+          <thead>
+            <tr>
+              <th>Sr. No.</th>
+              <th>Date</th>
+              <th>Expense Head</th>
+              <th>Sub Expense Head</th>
+              <th>Quantity</th>
+              <th>Rate</th>
+              <th>Cash</th>
+              <th>Recipt</th>
+              <th>Self/Party</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let expense of expenseDetails; let i =index">
+              <td>{{expense.serverId}}</td>
+              <td>{{expense.Date}}</td>
+              <td>{{expense.ExpenseTypeText}}</td>
+              <td>{{expense.SubExpenseTypeText}}</td>
+              <td>{{expense.Qty_Size_Area}}</td>
+              <td>{{expense.Rate}}</td>
+              <td>{{expense.PaymentTypeText}}</td>
+              <td>{{expense.InvoiceNo}}</td>
+              <td>{{expense.SourceOfExpense}}</td>
+              <td>{{expense.TotalExpense}}</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="text-right">
+          <button type="submit" *ngIf="IsPrint == true" class="btn btn-sm btn-primary" (click)="printExpenseData()">
+            <i class="fa fa-print"></i> Print</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--/.col-->
+</div>

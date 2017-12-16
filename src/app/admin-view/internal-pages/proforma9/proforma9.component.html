@@ -1,0 +1,121 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-sm-6 col-md-12">
+      <div class="card" id="divProformaData">
+        <div class="card-header">
+          <div style="height: 9px"></div>
+          <div align="Center" style="font-size: large; font-weight: bold">नमुना-९</div>
+          <div style="height: 9px"></div>
+          <div align="Center" style="font-size: small; font-weight: bold">(निकाल लागल्यापासून सादर विवरणपत्र ६० दिवसाच्या आत सादर करावे)</div>
+          <div align="Center" style="font-size: large; font-weight: bold">राजकीय पक्ष - निधीबाबतचा तपशिल (देणगी, भेट, कर्ज, पक्ष निधी इ.)</div>
+        </div>
+        <div class="card-block">
+          <div style="height: 9px"></div>
+          <div style="height: 9px"></div>
+          <div style="border: groove">
+            <table style="width: 100%;">
+              <tr>
+                <td class="auto-style1">पक्षाचे नाव :</td>
+                <td>
+                  <span id="MainContent_lblcandidateName">{{extraDetails.PartyName}}</span>
+                </td>
+                <td class="auto-style2"></td>
+                <td>
+                  <span id="MainContent_lblDistrictNm"></span>
+                </td>
+              </tr>
+              <tr>
+                <td class="auto-style1">निधी स्विकारल्याचा कालावधी :</td>
+                <td>
+                  <span id="MainContent_lblParty">दि: ते दि:</span>
+                </td>
+                <td class="auto-style2"></td>
+                <td>
+                  <span id="MainContent_lblElection"></span>
+                </td>
+              </tr>
+              <tr>
+                <td class="auto-style2">निवडणुकीचा दिनांक:</td>
+                <td>
+                  <span id="MainContent_lblVotingDate">{{extraDetails.ElectionDate}}</span>
+                </td>
+                <td class="auto-style1"></td>
+                <td>
+                </td>
+              </tr>
+              <tr>
+                <td class="auto-style2">स्थानिक स्वराज्य संस्थेची नावे</td>
+                <td>
+                  <span id="MainContent_lblExpenseDate">{{currDate}}</span>
+                </td>
+                <td class="auto-style2">दिनांक:</td>
+                <td>
+                  <span id="MainContent_lblExpenseDate">{{currDate}}</span>
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div style="height: 9px"></div>
+          <div style="height: 9px"></div>
+          <table class="table table-bordered" id="dataTable">
+            <thead>
+              <tr>
+                <th>अ.क्</th>
+                <th>निधी देणाऱ्याचा नाव व पत्ता</th>
+                <th>निधी देणाऱ्याचा संपर्क क्रमांक</th>
+                <th>दिनांक</th>
+                <th>रोख/ चेक/ डि.डी. / इतर प्रकारे</th>
+                <th>देणाऱ्याच्या बँकेचे नाव व शाखा</th>
+                <th>निधीचा प्रकार (देणगी, भेट, कर्ज इ.)</th>
+                <th>रक्कम</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- <tr *ngFor="let activeData of activeFundData">
+                        <td>{{activeData.FundID}}</td>
+                        <td>{{activeData.ProviderName}}</td>
+                        <td>{{activeData.ProviderMobileNo}}</td>
+                        <td>{{activeData.Date}}</td>
+                        <td>{{activeData.PaidBy}}</td>
+                        <td>{{activeData.ProviderBankName}}</td>
+                        <td>{{activeData.FundTypeText}}</td>
+                        <td>{{activeData.Amount}}</td>
+                      </tr> -->
+              <!-- <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>एकूण</td>
+                        <td>{{totalAmount}}</td>
+                      </tr> -->
+            </tbody>
+          </table>
+          <div style="height: 9px"></div>
+          <table>
+            <tr>
+              <td style="height: 27px"></td>
+            </tr>
+          </table>
+          <div style="text-align:right">
+            <span id="MainContent_lblSignatureCandidate">पक्षाच्या पदाधिकाऱ्याचा सही</span>
+            <br />
+            <span id="MainContent_Label5">(सही करणाऱ्याचे नाव,पद)</span>
+            <br />
+            <span id="MainContent_Label9">पक्षाचे नाव</span>
+          </div>
+
+          <div style="height: 9px"></div>
+          <div style="height: 9px"></div>
+          <div class="col-md-5">
+            <button type="button" id="btnPrint" class="btn btn-primary" (click)="Print()">Print</button>
+          </div>
+          <div class="col-md-2"></div>
+        </div>
+      </div>
+    </div>
+    <!--/.col-->
+  </div>
+</div>

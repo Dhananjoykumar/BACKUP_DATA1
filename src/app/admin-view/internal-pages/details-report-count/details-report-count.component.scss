@@ -1,0 +1,68 @@
+.form-control {
+    // background-color:grey; /* Green */
+    border-color: green;
+    color: black;
+    padding: 3px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    // margin: 2px 2px;
+    cursor: pointer;
+}
+.form-control {border-radius: 20px;}
+
+#state {
+    padding: 5px;
+    margin-right: 50px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+}
+#district {
+    padding: 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+}
+#lbType {
+    padding: 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+}
+#localBody {
+    padding: 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+}
+#reportType {
+    padding: 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+}
+#btn {
+    margin-top: -3px;
+    margin-left:10px; 
+}
+
+#search {
+    padding: 15px;
+    background-color: #4CAF50;
+}
+#cancel {
+    padding: 15px;
+    background-color: rgb(231, 108, 108);
+}

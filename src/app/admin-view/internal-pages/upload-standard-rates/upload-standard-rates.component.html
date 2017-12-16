@@ -1,0 +1,130 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header">
+          <strong>Upload Standard Rates</strong>
+        </div>
+        <div class="card-block">
+          <form novalidate [formGroup]="uploadStdRates" (ngSubmit)="insertPartyCandidate(uploadStdRates.value)" class="form-horizontal">
+            <div class="form-group row">
+              <label class="col-md-4 form-control-label" for="selectState" id="state-label"> State</label>
+              <label class="col-md-4 form-control-label" for="selectDistrict" id="district-label"> District</label>
+              <label class="col-md-4 form-control-label" for="localbodytype" id="localbodytype-label"> Local Body Type</label>
+            </div>
+            <div class="form-group row" id="field-space-text">
+              <div class="col-md-4">
+                <select id="selectState" name="selectState" class="form-control" size="1" (change)="onStateChange()" formControlName="StateId">
+                  <option value="">Select State</option>
+                  <option *ngFor="let s of stateList" [value]="s.StateId">{{s.StateName}}</option>
+                </select>
+                <div class="alert" *ngIf="!uploadStdRates.controls['StateId'].valid && uploadStdRates.controls['StateId'].touched">{{titleAlert}}</div>
+              </div>
+              <div class="col-md-4">
+                <select id="selectDistrict" name="selectDistrict" class="form-control" size="1" formControlName="DistId">
+                  <!-- (change)="onExpenseChange()" -->
+                  <option value="">Select Value</option>
+                  <option *ngFor="let d of distList" [value]="d.DistId">{{d.DistName}}</option>
+                </select>
+                <div class="alert" *ngIf="!uploadStdRates.controls['DistId'].valid && uploadStdRates.controls['DistId'].touched">{{titleAlert}}</div>
+              </div>
+              <div class="col-md-4">
+                <select id="localbodytype" name="localbodytype" class="form-control" size="1" formControlName="LocalBodyType">
+                  <option value="">Select Local Body Type</option>
+                  <option value="1">Municipal Corporation</option>
+                  <option value="2">Municipal Council</option>
+                  <option value="3">Nagar Panchayat</option>
+                  <option value="4">Zilla Parishad</option>
+                  <option value="5">Panchayat Samiti</option>
+                </select>
+                <div class="alert" *ngIf="!uploadStdRates.controls['LocalBodyType'].valid && uploadStdRates.controls['LocalBodyType'].touched">{{titleAlert}}</div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-4 form-control-label" for="localbodytype-input" id="localbodytype-label"> Local Body</label>
+              <label class="col-md-4 form-control-label" for="partytype-input" id="partytype-label">Expense Type</label>
+              <label class="col-md-4 form-control-label" for="partyname-input" id="partyname-label">Subexpense Type</label>
+            </div>
+            <div class="form-group row" id="field-space-text">
+              <div class="col-md-4">
+                <select id="selectExpenseHead" name="selectExpenseHead" class="form-control" size="1" formControlName="LocalBodyId">
+                  <!-- (change)="onExpenseChange()" -->
+                  <option value="">Select Value</option>
+                  <option value="1">Hadgaon nagar parishad</option>
+                  <option value="2">Ardhapur Nagar Panchayat</option>
+                  <option value="3">Mudkhed Nagar Parishad</option>
+                  <option value="4">Umri Nagar Parishad</option>
+                  <option value="5">Dharmabad Nagar Parishad</option>
+                  <option value="6">Biloli Municipal Council</option>
+                  <option value="7">Kundalwadi Nagar Parishad</option>
+                  <option value="8">Kandhar Municipal Council</option>
+                  <option value="9">Mukhed Nagar Parishad</option>
+                  <option value="10">Degloor Nagar Parishad</option>
+                  <option value="11">Mahur Nagar Panchayat</option>
+                  <option value="12">Nanded Zilla Parishad</option>
+                  <option value="13">Kinwat Zilla Parishad</option>
+                  <option value="14">Nanded Corporation</option>
+                </select>
+                <div class="alert" *ngIf="!uploadStdRates.controls['LocalBodyId'].valid && uploadStdRates.controls['LocalBodyId'].touched">{{titleAlert}}</div>
+              </div>
+              <div class="col-md-4">
+                <select id="selectExpenseHead" name="selectExpenseHead" class="form-control" size="1" (change)="onExpenseChange()" formControlName="ExpenseType">
+                  <option value="">Select Value</option>
+                  <option *ngFor="let e of expense" [value]="e.EID">{{e.ExpenseTypeT}}</option>
+                </select>
+                <div class="alert" *ngIf="!uploadStdRates.controls['ExpenseType'].valid && uploadStdRates.controls['ExpenseType'].touched">{{titleAlert}}</div>
+              </div>
+              <div class="col-md-4">
+                <select id="selectExpensesSubHead" name="selectExpensesSubHead" class="form-control" size="1" formControlName="SubExpenseType">
+                  <!-- (change)="onSubExpenseChange()" -->
+                  <option value="">Select value</option>
+                  <option *ngFor="let se of subExp;let i = index" [value]="se.SubExpenseType">{{se.SubExpenseTypeText}}</option>
+                </select>
+                <div class="alert" *ngIf="!uploadStdRates.controls['SubExpenseType'].valid && uploadStdRates.controls['SubExpenseType'].touched">{{titleAlert}}</div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-4 form-control-label" for="electiontype" id="electiontype-label">Unit</label>
+              <label class="col-md-4 form-control-label" for="wardno-input" id="wardno-label">Rate per Unit</label>
+            </div>
+            <div class="form-group row" id="field-space-text">
+              <div class="col-md-4">
+                <select id="electiontype" name="electiontype" class="form-control" size="1" formControlName="Unit">
+                  <option value="">Select Unit</option>
+                  <option value="1">Per Unit</option>
+                  <option value="2">Per Item/Per Day</option>
+                  <option value="3">Per Day</option>
+                  <option value="4">Per Person</option>
+                  <option value="5">Per Page</option>
+                  <option value="6">Per Sqft</option>
+                  <option value="7">Per Sqcm</option>
+                  <option value="8">Per Second</option>
+                  <option value="9">Rs</option>
+                  <option value="10">No Unit</option>
+                  <option value="11">Per Sq Meter</option>
+                  <option value="12">Per Km</option>
+                  <option value="13">Per Day Per SqMtr</option>
+                </select>
+                <div class="alert" *ngIf="!uploadStdRates.controls['Unit'].valid && uploadStdRates.controls['Unit'].touched">{{titleAlert}}</div>
+              </div>
+              <div class="col-md-4">
+                <input type="text" id="rate-input" name="rate-input" class="form-control" formControlName="Rate" placeholder="Enter Rate"
+                  (keypress)="_keyPress($event)">
+                <div class="alert" *ngIf="!uploadStdRates.controls['Rate'].valid && uploadStdRates.controls['Rate'].touched">{{titleAlert}}</div>
+              </div>
+            </div>
+            <div class="text-right">
+              <button type="submit" class="btn btn-sm btn-primary" *ngIf="isEditable == false" [disabled]="!uploadStdRates.valid">
+                <i class="fa fa-dot-circle-o"></i> Submit</button>
+              <button type="submit" *ngIf="isEditable == true" class="btn btn-sm btn-primary" [disabled]="!uploadStdRates.valid">
+                <i class="fa fa-dot-circle-o"></i> Update</button>
+              <button type="reset" class="btn btn-sm btn-danger" *ngIf="isEditable == false">
+                <i class="fa fa-ban"></i> Reset</button>
+              <button type="reset" class="btn btn-sm btn-danger" (click)="cancelData()">
+                <i class="fa fa-close"></i> Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>

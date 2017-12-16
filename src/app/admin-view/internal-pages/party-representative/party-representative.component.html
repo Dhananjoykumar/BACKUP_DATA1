@@ -1,0 +1,118 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <strong>Add Party Representative</strong>
+        </div>
+        <div class="card-block" id="form-container">
+          <form novalidate [formGroup]="partyRepForm" (ngSubmit)="savePartyRepresentative(partyRepForm.value, partyRepForm.valid)">
+            <!-- <h6 class="col-sm-3" style="padding-top:10px;padding-bottom:10px;background-color: lightskyblue;">
+                <b style="margin-left:20px;color:darkslategrey;">Add Party Details:</b>
+              </h6> -->
+            <!-- <br> -->
+
+            <div class="form-group row" >
+              <label id="RepMobileNo" class=" col-md-6 form-control-label" for="RepMobileNo">Enter Mobile No</label>
+              <label class=" col-md-6 form-control-label" for="select">District</label>
+            </div>
+            <div class="form-group row" id="field-space-text">
+              <div class="col-md-6">
+                <input id="RepMobileNo" formControlName="RepMobileNo" name="RepMobileNo" type="text" class="form-control"
+                  placeholder="Mobile No" maxlength="10" (change)="onMobileNoEntered()" (keypress)="keyPress($event)">
+                <div class="alert" *ngIf="!partyRepForm.controls['RepMobileNo'].valid && partyRepForm.controls['RepMobileNo'].touched">{{titleAlert}}</div>
+              </div>
+              <div class="col-md-6">
+                <input type="text" id="DistrictId"  formControlName="DistrictId" name="DistrictId" class="form-control" placeholder="District"
+                  disabled>
+                <!-- <div class="alert" *ngIf="!partyForm.controls['ContactPersonMobile'].valid && partyForm.controls['ContactPersonMobile'].touched">{{titleAlert}}</div> -->
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label id="RegDate" class=" col-md-6 form-control-label" for="LocalBodyId">Local Body Name</label>
+              <label class=" col-md-6 form-control-label" for="select">Party Type</label>
+            </div>
+            <div class="form-group row" id="field-space-text">
+              <div class="col-md-6">
+                <input id="LocalBodyId" formControlName="LocalBodyId" name="LocalBodyId" type="text" class="form-control" placeholder="LocalBodyName"
+                  disabled>
+                <!-- <div class="alert" *ngIf="!partyForm.controls['ContactPersonName'].valid && partyForm.controls['ContactPersonName'].touched">{{titleAlert}}</div> -->
+              </div>
+              <div class="col-md-6">
+                <input type="text" id="PartyId" formControlName="PartyId" name="PartyId" class="form-control" placeholder="PartyType"
+                  disabled>
+                <!-- <div class="alert" *ngIf="!partyForm.controls['ContactPersonMobile'].valid && partyForm.controls['ContactPersonMobile'].touched">{{titleAlert}}</div> -->
+              </div>
+
+            </div>
+
+
+            <div class="form-group row">
+              <label id="RegDate" class=" col-md-6 form-control-label" for="RegDate">Party Name</label>
+              <label class=" col-md-6 form-control-label" for="RoleId">Select Role</label>
+            </div>
+            <div class="form-group row" id="field-space-text">
+              <div class="col-md-6">
+                <input id="PartyName" formControlName="PartyName" name="PartyName" type="text" class="form-control" placeholder="Party Name"
+                  disabled>
+                <!-- <div class="alert" *ngIf="!partyForm.controls['ContactPersonName'].valid && partyForm.controls['ContactPersonName'].touched">{{titleAlert}}</div> -->
+              </div>
+              <div class="col-md-6">
+                <select id="RoleId" formControlName="RoleId" name="RoleId" class="form-control">
+                  <option value="">--Select--</option>
+                  <option value="1">Main Admin</option>
+                  <option value="2">Regional Head Representative</option>
+                  <option value="3">District Head</option>
+                  <option value="4">Block Head</option>
+                  <option value="5">Local Body Head</option>
+                </select>
+                <div class="alert" *ngIf="!partyRepForm.controls['RoleId'].valid && partyRepForm.controls['RoleId'].touched">{{titleAlert}}</div>
+              </div>
+
+            </div>
+
+            <div class="form-group row">
+              <label class=" col-md-6 form-control-label" for="Rep_Name">Enter Representative Name</label>
+              <label class="col-md-6 form-control-label" for="select">Status</label>
+            </div>
+
+            <div class="form-group row" id="field-space-text">
+              <div class="col-md-6">
+                <input type="text" id="Rep_Name" formControlName="Rep_Name" name="Rep_Name" class="form-control" placeholder="Representative Name">
+                <div class="alert" *ngIf="!partyRepForm.controls['Rep_Name'].valid && partyRepForm.controls['Rep_Name'].touched">{{titleAlert}}</div>
+              </div>
+              <div class="col-md-4">
+                  <label class="radio-inline" for="inline-radio1">
+                    <input type="radio" id="self-radio" name="IsActive" value="1" formControlName="IsActive" > Active &nbsp;&nbsp;&nbsp;&nbsp;
+                  </label>
+                  <label class="radio-inline" for="inline-radio2">
+                    <input type="radio" id="party-radio" name="IsActive" value="0" formControlName="IsActive" > Deactive
+                  </label>
+                  <div class="alert" *ngIf="!partyRepForm.controls['IsActive'].valid && partyRepForm.controls['IsActive'].touched">{{titleAlert}}</div>                
+                </div>
+            </div>
+            <br>
+            <br>
+            <div class="text-right">
+              
+               <button type="submit" *ngIf="isEdit==true" class="btn btn-sm btn-success " [disabled]="!partyRepForm.valid">
+                 <i class="fa fa-dot-circle-o"></i>  Submit</button>
+                 <button type="reset" *ngIf="isEdit==true" class="btn btn-sm btn-warning ">
+                   <i class="fa fa-ban"></i>   Reset</button>
+               <button type="submit" *ngIf="isEdit==false" class="btn btn-sm btn-success" [disabled]="!partyRepForm.valid">
+                 <i class="fa fa-dot-circle-o"></i> Update</button>
+                 <button type="submit"  class="btn btn-sm btn-danger" (click)="onCancel();">
+                   <i class="fa fa-close"></i>  Cancel</button>
+               </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+

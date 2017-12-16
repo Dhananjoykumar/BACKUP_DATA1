@@ -1,0 +1,69 @@
+<div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header">
+          <!-- <i class="fa fa-align-justify"></i>  -->
+          Party Candidate List
+          <button type="submit" class="btn btn-sm btn-primary" id="btnAddNewFund" (click)="addNewFund()"> Add New Party Candidate</button>
+        </div>
+        <div class="card-block">
+          <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+          <table class="table  table-bordered table-condensed table table-hover">
+            <thead id="theadStyle">
+              <tr>
+                <th>Id</th>
+                <th>Party Type</th>
+                <th>Party Name</th>
+                <th>District</th>
+                <th>Local Body Type</th>
+                <th>Local Body</th>
+                <th>Election Type</th>
+                <th>Election Date</th>
+                <th>Candidate Name</th>
+                <th>Ward No.</th>
+                <th>Seat No.</th>
+                <th>Verified</th>
+                <th>Nomination Withdrawn</th>
+                <th>Election Result</th>
+                <th>Action</th>
+                <th>Edit</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let candidate of candidateList | paginate: {itemsPerPage: 5, currentPage:page, id: '1'};let i = index">
+                <td>{{candidate.Id}}</td>
+                <td>{{candidate.PartyTypeText}}</td>
+                <td>{{candidate.PartyNameText}}</td>
+                <td>{{candidate.DistName}}</td>
+                <td>{{candidate.LocalBodyTypeText}}</td>
+                <td>{{candidate.LocalBodyIdText}}</td>
+                <td>{{candidate.ElectionTypeId}}</td>
+                <td>{{candidate.ElectionDate}}</td>
+                <td>{{candidate.CandidateName}}</td>
+                <td>{{candidate.WardNo}}</td>
+                <td>{{candidate.SeatNo}}</td>
+                <td>{{candidate.VerifiedId}}</td>
+                <td>{{candidate.NomiWithdrawId}}</td>
+                <td>{{candidate.ElectionResultId}}</td>
+                <td>
+                  <i *ngIf="candidate.IsActive == 0" class="fa fa-check fa-lg mt-2" style="cursor:pointer;" (click)="activateFund(candidate.Id)"
+                    title="Activate"></i>
+                  <i *ngIf="candidate.IsActive == 1" class="fa fa-close fa-lg mt-2" style="cursor:pointer;" (click)="activateFund(candidate.Id)"
+                    title="Deactivate"></i>
+                </td>
+                <td>
+                  <i class="fa fa-edit fa-lg mt-2" style="cursor:pointer;" title="Edit" (click)="editCandidate(candidate.Id)"></i>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- <nav> -->
+          <ul class="pagination">
+            <pagination-controls (pageChange)="page = $event" id="1" style="cursor:pointer;" maxSize="5" directionLinks="true" autoHide="true">
+            </pagination-controls>
+          </ul>
+          <!-- </nav> -->
+        </div>
+      </div>
+    </div>
+    <!--/.col-->

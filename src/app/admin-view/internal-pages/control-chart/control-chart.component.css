@@ -1,0 +1,10 @@
+agm-map {
+  height: 300px;
+  width: 400px;
+}
+
+#div-scroll
+{
+width:600px;
+overflow-x:scroll;
+}
