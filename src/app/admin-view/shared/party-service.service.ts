@@ -2,56 +2,22 @@ import { Injectable } from '@angular/core';
 import { AddParty } from 'app/admin-view/models/party';
 import { FundDetails } from 'app/admin-view/models/fundDetails';
 import { PartyCandidateList } from 'app/admin-view/models/partyCandidateList';
-import { PartyRepresentative } from 'app/admin-view/models/partyRepresentative';
+import { Observable } from 'rxjs/Observable';
 import { Http } from '@angular/http';
 
 @Injectable()
 export class PartyServiceService {
 
     partyArray: AddParty[] = [];
-    partyRep: PartyRepresentative[] = new Array<PartyRepresentative>();
+
     partyFundArray: FundDetails[] = new Array<FundDetails>();
     candidateParty: PartyCandidateList[] = new Array<PartyCandidateList>();
     public tempData: any;
-    tmpPartyArray: PartyRepresentative;
     storageEl: any;
     index: number;
-
-    baseUrl: string = 'http://mh.truevoters.in/WebServices/Party.svc';
+    expBaseUrl = 'http://mh.truevoters.in/WebServices/Expense.svc';
 
   constructor(private http: Http) {
-    this.partyRep = [
-      {
-      ID: '1',
-      RepMobileNo: '9326854760',
-      PartyId: 'ABC',
-      RegistrationDate: '2017-12-02',
-      DistrictId: 'PUNE',
-      Symbols: 'SWARD',
-      LocalBodyId: 'PUNE',
-      PartyName: 'ABC',
-      Rep_Name: 'XYZ',
-      RoleId: 1,
-      IsActive: '0',
-      MobileNo: '',
-      TokenId: ''
-    },
-    {
-      ID: '2',
-      RepMobileNo: '7308213174',
-      PartyId: '2',
-      RegistrationDate: '2017-12-02',
-      Symbols: 'SWARD',
-      DistrictId: 'PUNE',
-      LocalBodyId: 'PUNE',
-      PartyName: 'SWRAJYA',
-      Rep_Name: 'ABC',
-      RoleId: 1,
-      IsActive: '1',
-      MobileNo: '',
-      TokenId: ''
-    }
-  ];
     this.index = 0;
     this.candidateParty = [
       {
@@ -85,62 +51,62 @@ export class PartyServiceService {
           TokenId: '4234234234'
       }
     ];
-    this.partyFundArray = [
-      {
-          Address: 'abc',
-          Amount: 100,
-          CheckNo: 423846327,
-          CheckDate: '2017-12-04',
-          CreatedBy: 'abc',
-          CreatedDate: '2017-12-04',
-          Date: '2017-12-04',
-          FromWhom: 1,
-          FromWhomText: 'sdfghshf',
-          FundID: 1,
-          FundType: 2,
-          FundTypeText: 'Gift',
-          IMEINo: '0',
-          IsActive: 0,
-          MobileNo: '515164861',
-          ModifyBy: 'abc',
-          ModifyDate: '2017-12-04',
-          ModifiedBy: 'abc',
-          ModifiedDate: '2017-12-04',
-          PaidBy: 2,
-          ProviderBankName: 'dhagdajsd',
-          ProviderMobileNo: '63472846',
-          ProviderName: 'gfshdfgsdjfg',
-          Status: '',
-          TokenId: ''
-      },
-      {
-        Address: 'def',
-        Amount: 200,
-        CheckNo: 0,
-        CheckDate: '2017-12-03',
-        CreatedBy: 'def',
-        CreatedDate: '2017-12-03',
-        Date: '2017-12-03',
-        FromWhom: 1,
-        FromWhomText: 'sdfghshf',
-        FundID: 2,
-        FundType: 3,
-        FundTypeText: 'Loan',
-        IMEINo: '0',
-        IsActive: 0,
-        MobileNo: '8645684',
-        ModifyBy: 'def',
-        ModifyDate: '2017-12-03',
-        ModifiedBy: 'def',
-        ModifiedDate: '2017-12-03',
-        PaidBy: 1,
-        ProviderBankName: 'hgjhgjyt',
-        ProviderMobileNo: '54646456',
-        ProviderName: 'kjhkhjkhjk',
-        Status: '',
-        TokenId: ''
-    }
-    ];
+    // this.partyFundArray = [
+    //   {
+    //       Address: 'abc',
+    //       Amount: 100,
+    //       CheckNo: '423846327',
+    //       CheckDate: '2017-12-04',
+    //       CreatedBy: 'abc',
+    //       CreatedDate: '2017-12-04',
+    //       Date: '2017-12-04',
+    //       FromWhom: 1,
+    //       FromWhomText: 'sdfghshf',
+    //       FundID: 1,
+    //       FundType: 2,
+    //       FundTypeText: 'Gift',
+    //       IMEINo: '0',
+    //       IsActive: 0,
+    //       MobileNo: '515164861',
+    //       ModifyBy: 'abc',
+    //       ModifyDate: '2017-12-04',
+    //       ModifiedBy: 'abc',
+    //       ModifiedDate: '2017-12-04',
+    //       PaidBy: 2,
+    //       ProviderBankName: 'dhagdajsd',
+    //       ProviderMobileNo: '63472846',
+    //       ProviderName: 'gfshdfgsdjfg',
+    //       Status: '',
+    //       TokenId: ''
+    //   },
+    //   {
+    //     Address: 'def',
+    //     Amount: 200,
+    //     CheckNo: '0',
+    //     CheckDate: '2017-12-03',
+    //     CreatedBy: 'def',
+    //     CreatedDate: '2017-12-03',
+    //     Date: '2017-12-03',
+    //     FromWhom: 1,
+    //     FromWhomText: 'sdfghshf',
+    //     FundID: 2,
+    //     FundType: 3,
+    //     FundTypeText: 'Loan',
+    //     IMEINo: '0',
+    //     IsActive: 0,
+    //     MobileNo: '8645684',
+    //     ModifyBy: 'def',
+    //     ModifyDate: '2017-12-03',
+    //     ModifiedBy: 'def',
+    //     ModifiedDate: '2017-12-03',
+    //     PaidBy: 1,
+    //     ProviderBankName: 'hgjhgjyt',
+    //     ProviderMobileNo: '54646456',
+    //     ProviderName: 'kjhkhjkhjk',
+    //     Status: '',
+    //     TokenId: ''
+    // }
+    // ];
    }
 
    getPartydata(): Array<AddParty> {
@@ -170,11 +136,27 @@ export class PartyServiceService {
     ];
    }
 
-   addPartyFundDetails(partyFundData): Array<FundDetails> {
-    console.log(partyFundData);
-    this.partyFundArray.push(partyFundData);
-    console.log(this.partyFundArray);
-    return this.partyFundArray;
+   addPartyFundDetails(partyFundData): Observable<any> {
+    this.partyArray[0] = partyFundData;
+    console.log(JSON.stringify(this.partyArray));
+    return this.http
+            .post(this.expBaseUrl + '/InsertUpdatePartyFundDetails/FundData', JSON.stringify(this.partyArray))
+            .map(res => res.json()['InsertUpdatePartyFundDetailsResult']);
+    // this.partyFundArray.push(partyFundData);
+    // console.log(this.partyFundArray);
+    // return this.partyFundArray;
+   }
+
+   downloadPartyFundDetails() {
+     return this.http.get(this.expBaseUrl + '/GetPartyFundDetails?Id=0&FromDate=0&ToDate=0&MaxId=0&MobileNo=7741909862&TokenId=D29D522E-F95B-4191-BF73-440C196177B1')
+            .map(res => res.json()['GetPartyFundDetailsResult']);
+   }
+
+   activatePartyFundDetails(partyFundData: FundDetails){
+     this.partyFundArray[0] = partyFundData;
+     console.log(JSON.stringify(this.partyFundArray));
+     return this.http.post(this.expBaseUrl + '/UpdatePartyFundDetailsStatus/StatusFundData', JSON.stringify(this.partyFundArray))
+              .map(res => res.json()['UpdatePartyFundDetailsStatusResult']);
    }
 
    editFundData(fundId: number): FundDetails {
@@ -201,19 +183,4 @@ export class PartyServiceService {
 
     return result[0];
    }
-   getpartyRep(mobileNo: string) {
-    console.log(mobileNo);
-   const result = this.partyRep.filter(function (partyRepData) {
-     return partyRepData.RepMobileNo == mobileNo;
-   });
-   console.log(result);
-   return this.tmpPartyArray = result[0];
-  }
-
-  checkMobileNo(partyArrayObj: AddParty) {
-    this.partyArray[0] = partyArrayObj;
-    return this.http.post(this.baseUrl + '/CheckPartyOffMob/ChkMobNo', JSON.stringify(this.partyArray))
-    .map(res => res.json()['CheckPartyOffMobResult']);
-  }
-
 }

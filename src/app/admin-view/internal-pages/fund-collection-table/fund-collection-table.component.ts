@@ -8,6 +8,7 @@ import { Validators } from '@angular/forms/src/validators';
 import { validateConfig } from '@angular/router/src/config';
 import { ResultData } from 'app/admin-view/models/result';
 import { last } from '@angular/router/src/utils/collection';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-fund-collection-table',
@@ -19,7 +20,7 @@ export class FundCollectionTableComponent implements OnInit {
   fundDetails: FundDetails[] = [];
   fundData = new FundDetails;
   updateIndex: number;
-  result: ResultData;
+  result = new ResultData;
   public loading = false;
 
   editFundData = new FormGroup({
@@ -32,15 +33,6 @@ export class FundCollectionTableComponent implements OnInit {
     ProviderBankName: new FormControl('', Validators.required),
     Address: new FormControl('', Validators.required),
     ProviderMobileNo: new FormControl('', Validators.required),
-    // IsActive: new FormControl('', Validators.required),
-    // CreatedDate: new FormControl('', Validators.required),
-    // IMEINo: new FormControl('', Validators.required),
-    // ModifiedBy: new FormControl('', Validators.required),
-    // ModifiedDate: new FormControl('', Validators.required),
-    // ProviderMobileNo: new FormControl('', Validators.required),
-    // ProviderName: new FormControl('', Validators.required),
-    // Status: new FormControl('', Validators.required),
-    // TokenId: new FormControl('', Validators.required)
   });
 
   constructor(public fundDetailForm: FundCollectionDetailsComponent, private router: Router, private _expService: ExpenseService) {
@@ -58,6 +50,10 @@ export class FundCollectionTableComponent implements OnInit {
     this.loading = true;
     this._expService.getFundDetails().subscribe(data => {
       this.fundDetails = data;
+      console.log(data);
+      for (let i = 0;i < this.fundDetails.length; i++) {
+        this.fundDetails[i].Date = moment(this.fundDetails[i].Date).format('YYYY-MM-DD');
+      }
       this.loading = false;
     });
   }
@@ -70,52 +66,37 @@ export class FundCollectionTableComponent implements OnInit {
     this._expService.storageEl = result[0];
     console.log(this._expService.storageEl);
     this.router.navigateByUrl('/pages/fundcollectiondetails');
-    // myModal.show();
-    // for (let i = 0;i < this.fundDetails.length; i++) {
-    //   if (id == this.fundDetails[i].FundID) {
-    //     this.updateIndex = i;
-    //     this.editFundData.patchValue({Date: this.fundDetails[i].Date});
-    //     this.editFundData.patchValue({FromWhomText: this.fundDetails[i].FromWhomText});
-    //     this.editFundData.patchValue({FundTypeText: this.fundDetails[i].FundTypeText});
-    //     this.editFundData.patchValue({Amount: this.fundDetails[i].Amount});
-    //     this.editFundData.patchValue({PaidBy: this.fundDetails[i].PaidBy});
-    //     this.editFundData.patchValue({CheckNo: this.fundDetails[i].CheckNo});
-    //     this.editFundData.patchValue({ProviderBankName: this.fundDetails[i].ProviderBankName});
-    //     this.editFundData.patchValue({Address: this.fundDetails[i].Address});
-    //     this.editFundData.patchValue({ProviderMobileNo: this.fundDetails[i].ProviderMobileNo});
-    //   }
-    // }
   }
 
   activateFund(id: number) {
-    for (let i = 0;i < this.fundDetails.length;i++) {
-      if (id == this.fundDetails[i].FundID) {
-        if (this.fundDetails[i].IsActive == 0) {
-          this.fundDetails[i].IsActive = 1;
-          this.fundDetails[i].TokenId = 'D29D522E-F95B-4191-BF73-440C196177B1';
-          this._expService.addFundDetails(this.fundDetails[i]).subscribe(data => {
-            this.result = data;
-            if (this.result[0].Status == 106) {
-              swal('Activated!!!', 'Record Activation Successful', 'success');
-            } else {
-              swal('Sorry!!!', 'Record Activation Failed', 'error');
-            }
-          });
+    var result = this.fundDetails.filter(function(fund){
+      return fund.FundID == id;
+    });
+
+    this.fundData = result[0];
+    console.log(this.fundData);
+    if (this.fundData.IsActive == 0) {
+      this.fundData.IsActive = 1;
+      this.fundData.TokenId = 'D29D522E-F95B-4191-BF73-440C196177B1';
+      this._expService.activateFundData(this.fundData).subscribe(data => {
+        this.result = data;
+        if (this.result[0].Status == 106) {
+          swal('Activated!!!', 'Record Activation Successful', 'success');
         } else {
-          this.fundDetails[i].IsActive = 0;
-          this.fundDetails[i].TokenId = 'D29D522E-F95B-4191-BF73-440C196177B1';
-          this._expService.addFundDetails(this.fundDetails[i]).subscribe(data => {
-            this.result = data;
-            if (this.result[0].Status == 106) {
-              swal('Deactivated!!!', 'Record Deactivation Successful', 'success');
-            } else {
-              swal('Sorry!!!', 'Record Deactivation Failed', 'error');
-            }
-          });
+          swal('Sorry!!!', 'Record Activation Failed', 'error');
         }
-      } else {
-        continue;
-      }
+      });
+    } else {
+      this.fundData.IsActive = 0;
+      this.fundData.TokenId = 'D29D522E-F95B-4191-BF73-440C196177B1';
+      this._expService.activateFundData(this.fundData).subscribe(data => {
+        this.result = data;
+        if (this.result[0].Status == 106) {
+          swal('Deactivated!!!', 'Record Deactivation Successful', 'success');
+        } else {
+          swal('Sorry!!!', 'Record Deactivation Failed', 'error');
+        }
+      });
     }
   }
 

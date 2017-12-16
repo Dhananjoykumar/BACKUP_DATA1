@@ -67,51 +67,68 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" routerLinkActive="active" [routerLink]="['/pages/local-body-table']">
-                <i class="icon-puzzle"></i> LocalBody Table</a>
-            </li>
-
-            <li class="nav-item">
-              <a class="nav-link" routerLinkActive="active" [routerLink]="['/pages/otp-password']">
-                <i class="icon-puzzle"></i>Get OTP & Password</a>
+                <i class="icon-puzzle"></i> LocalBody Table Report</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" routerLinkActive="active" [routerLink]="['/pages/addOffers']">
-                <i class="icon-puzzle"></i>Add Offers</a>
+              <a class="nav-link" routerLinkActive="active" [routerLink]="['/pages/addnews']">
+                <i class="icon-puzzle"></i> Add News</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" routerLinkActive="active" [routerLink]="['/pages/addOfferTable']">
-                <i class="icon-puzzle"></i>Add Offers Table</a>
+              <a class="nav-link" routerLinkActive="active" [routerLink]="['/pages/addnewstable']">
+                <i class="icon-puzzle"></i> News Table</a>
+            </li>
+            <li class="nav-item nav-dropdown" routerLinkActive="open">
+              <a class="nav-link nav-dropdown-toggle" href="#">
+                <i class="icon-puzzle"></i>Messaging</a>
+              <ul class="nav-dropdown-items">
+                <li class="nav-item">
+                  <a class="nav-link" routerLinkActive="active" [routerLink]="['/pages/dynamicmessaging']">
+                    <i class="icon-puzzle"></i> Dynamic Messaging</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" routerLinkActive="active" [routerLink]="['/pages/nominationdaily']">
+                    <i class="icon-puzzle"></i> Nomination Daily Message</a>
+                </li>
+              </ul>
             </li>
           </ul>
         </li>
-
-        <!-- Reports view start here -->
-
         <li class="nav-item nav-dropdown" routerLinkActive="open">
-          <a class="nav-link nav-dropdown-toggle" href="#">
-            <i class="icon-puzzle"></i>Reports</a>
-          <ul class="nav-dropdown-items">
-            <li class="nav-item">
-              <a class="nav-link" routerLinkActive="active" [routerLink]="['/pages/voterStatusReport']">
-                <i class="icon-puzzle"></i>Voter Status Report</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" routerLinkActive="active" [routerLink]="['/pages/reportCount']">
-                <i class="icon-puzzle"></i>Detail Report Count</a>
-            </li>
-          </ul>
-        </li>
-
-        <!-- Expense view start here -->
-        
+            <a class="nav-link nav-dropdown-toggle" href="#">
+              <i class="icon-puzzle"></i>Reports</a>
+            <ul class="nav-dropdown-items">
+              <li class="nav-item">
+                <a class="nav-link" routerLinkActive="active" [routerLink]="['/pages/nominationreports']">
+                  <i class="icon-puzzle"></i>Nomination Report</a>
+              </li>
+              <li class="nav-item nav-dropdown" routerLinkActive="open">
+                <a class="nav-link nav-dropdown-toggle" href="#">
+                  <i class="icon-puzzle"></i>Expense Reports</a>
+                <ul class="nav-dropdown-items">
+                  <li class="nav-item">
+                    <a class="nav-link" routerLinkActive="active" [routerLink]="['/pages/discrepencyreport']">
+                      <i class="icon-puzzle"></i> Discrepancy Report</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" routerLinkActive="active" [routerLink]="['/pages/deviationreport']">
+                      <i class="icon-puzzle"></i> Deviation Report</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" routerLinkActive="active" [routerLink]="['/pages/expensereport']">
+                      <i class="icon-puzzle"></i> Expense Report</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
         <li class="nav-item nav-dropdown" routerLinkActive="open">
           <a class="nav-link nav-dropdown-toggle" href="#">
             <i class="icon-puzzle"></i> Expenses</a>
           <ul class="nav-dropdown-items">
-            <li class="nav-item">
+            <!-- <li class="nav-item">
               <a class="nav-link" routerLinkActive="active" [routerLink]="['/admin']">
                 <i class="icon-puzzle"></i> Admin</a>
-            </li>
+            </li> -->
             <li class="nav-item">
               <a class="nav-link" routerLinkActive="active" [routerLink]="['/pages/dailyexpensetable']" (click)="loadExpenseTable()">
                 <i class="icon-puzzle"></i> Daily Expense Table</a>
@@ -135,14 +152,6 @@
             <li class="nav-item">
               <a class="nav-link" routerLinkActive="active" [routerLink]="['/pages/personalexpense']">
                 <i class="icon-puzzle"></i> Personal Expense</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" routerLinkActive="active" [routerLink]="['/pages/deviation']">
-                <i class="icon-puzzle"></i> Deviation</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" routerLinkActive="active" [routerLink]="['/pages/upload-Download-Expense']">
-                <i class="icon-puzzle"></i>Upload/Download SubExpense</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" routerLinkActive="active" [routerLink]="['/pages/uploadstandardrates']">
@@ -204,7 +213,7 @@
         </li>
         <li class="nav-item nav-dropdown" routerLinkActive="open">
           <a class="nav-link nav-dropdown-toggle" href="#">
-            <i class="icon-puzzle"></i>Party Profile</a>
+            <i class="icon-puzzle"></i>Party Data</a>
           <ul class="nav-dropdown-items">
             <li class="nav-item">
               <a class="nav-link" routerLinkActive="active" [routerLink]="['/pages/party-addition']">
@@ -217,10 +226,6 @@
             <li class="nav-item">
               <a class="nav-link" routerLinkActive="active" [routerLink]="['/pages/party-representative']">
                 <i class="icon-puzzle"></i>Add Party Representative</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" routerLinkActive="active" [routerLink]="['/pages/party-representative-table']">
-                <i class="icon-puzzle"></i>Party Representative Table</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" routerLinkActive="active" [routerLink]="['/pages/partyfunddetails']">
@@ -240,6 +245,16 @@
             </li>
           </ul>
         </li>
+        <!-- <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['']">
+            <i class="icon-calculator"></i> Widgets
+            <span class="badge badge-info">NEW</span>
+          </a>
+        </li> -->
+        <!-- <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['']">
+            <i class="icon-pie-chart"></i> Charts</a>
+        </li> -->
         <li class="divider"></li>
         <!-- <li class="nav-title">
           Extras
@@ -605,9 +620,9 @@
   </aside>
 </div>
 
-<!-- <footer class="app-footer">
+<footer class="app-footer">
   <a href="http://coreui.io">CoreUI</a> &copy; 2017 creativeLabs.
   <span class="float-right">Powered by
     <a href="http://coreui.io">CoreUI</a>
   </span>
-</footer> -->
+</footer>

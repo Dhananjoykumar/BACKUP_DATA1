@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
 import 'rxjs/add/operator/map';
-import { Http, RequestOptions, Headers } from '@angular/http';
+import { Http, Headers, RequestOptions } from '@angular/http';
 import { ExpenseData } from 'app/admin-view/models/expenseData';
 import { FundDetails } from 'app/admin-view/models/fundDetails';
 import { read } from 'fs';
 import { ExtraDetails } from 'app/admin-view/models/extraDetails';
+
 @Injectable()
 export class ExpenseService {
     sendExpense: ExpenseData[] = new Array<ExpenseData>();
@@ -17,9 +18,10 @@ export class ExpenseService {
     basicBaseUrl: string = 'http://mh.truevoters.in/WebServices/BasicData.svc';
     storageEl: any;
     storageArr: any[] = [];
-    options: RequestOptions;
+    tempStorageArr: any[] = [];
     headers: Headers;
-    
+    options: RequestOptions;
+
     constructor(private http: Http) {
         // console.log('ExpenseService Intialized!!!!');
         this.headers = new Headers({'Content-Type': 'applicationm/json', 'Accept': 'application/json'});
@@ -130,35 +132,20 @@ export class ExpenseService {
         console.log(stdRateData);
     }
 
-    // getStudentMarks(): Observable<any> {
-    //     return this.http.get('http://192.168.0.20:8086/mysocietyweb/student/getstudentmarks?tmid=1', this.options)
-    //             .map(res => res.json()['response']);
-    // }
-
-    getDataFreeApi() {
-        return this.http.get('http://services.groupkt.com/state/get/IND/all').map(
-            res => res.json()['RestResponse']);
-    }
-
-    dailyForecast() {
-        return this.http.get("http://samples.openweathermap.org/data/2.5/history/city?q=Warren,OH&appid=b6907d289e10d714a6e88b30761fae22")
-          .map(res => res.json());
-      }
-
-      getDataFreeApi1(name) {
-        return this.http.get('http://services.groupkt.com/state/search/IND?text=' + name).map(
-            res => res.json()['RestResponse']);
+    activateFundData(fundData: FundDetails) {
+        this.sendFund[0] = fundData;
+        return this.http.post(this.expenseBaseUrl + '/UpdateFundDetailsStatus/StatusFundData', JSON.stringify(this.sendFund))
+                .map(res => res.json()['UpdateFundDetailsStatusResult']);
     }
 
     getStudentMarks(tmid: number): Observable<any> {
         console.log(tmid);
-        return this.http.get('http://192.168.0.20:8086/mysocietyweb/student/getstudentmarks?tmid=' + tmid, this.options)
+        return this.http.get('http://localhost:8086/mysocietyweb/student/getstudentmarks?tmid=' + tmid, this.options)
                 .map(res => res.json()['response']);
     }
 
     getStudentTotalMarks(): Observable<any> {
-        return this.http.get('http://192.168.0.20:8086/mysocietyweb/student/getstudenttotalmarks', this.options)
+        return this.http.get('http://localhost:8086/mysocietyweb/student/getstudenttotalmarks', this.options)
                     .map(res => res.json()['response']);
     }
-      
 }

@@ -28,15 +28,20 @@
             <tr *ngFor="let fund of fundDetails | paginate: {itemsPerPage: 5, currentPage:page, id: '1'};let i = index">
               <td>{{fund.FundID}}</td>
               <!-- <td>{{i}}</td> -->
-              <td>{{fund.Date}}</td>
+              <td *ngIf="fund.Date === 0"></td>
+              <td *ngIf="fund.Date !== 0">{{fund.Date}}</td>
               <td>{{fund.FromWhomText}}</td>
               <td>{{fund.FundTypeText}}</td>
               <td>{{fund.Amount}}</td>
-              <td>{{fund.PaidBy}}</td>
-              <td>{{fund.CheckNo}}</td>
-              <td>{{fund.ProviderBankName}}</td>
-              <td>{{fund.Address}}</td>
-              <td>{{fund.ProviderMobileNo}}</td>
+              <td>{{fund.PaidByText}}</td>
+              <td *ngIf="fund.CheckNo === '0'"></td>
+              <td *ngIf="fund.CheckNo !== '0'">{{fund.CheckNo}}</td>
+              <td *ngIf="fund.ProviderBankName === '0'"></td>
+              <td *ngIf="fund.ProviderBankName !== '0'">{{fund.ProviderBankName}}</td>
+              <td *ngIf="fund.Address === '0'"></td>
+              <td *ngIf="fund.Address !== '0'">{{fund.Address}}</td>
+              <td *ngIf="fund.ProviderMobileNo === '0'"></td>
+              <td *ngIf="fund.ProviderMobileNo !== '0'">{{fund.ProviderMobileNo}}</td>
               <td>
                 <i *ngIf="fund.IsActive == 0" class="fa fa-check fa-lg mt-2" style="cursor:pointer;" (click)="activateFund(fund.FundID)"
                   title="Activate"></i>

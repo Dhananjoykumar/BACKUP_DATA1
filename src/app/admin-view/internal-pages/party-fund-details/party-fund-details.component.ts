@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FundDetails } from 'app/admin-view/models/fundDetails';
 import { PartyServiceService } from 'app/admin-view/shared/party-service.service';
 import { Router } from '@angular/router';
+import { ResultData } from 'app/admin-view/models/result';
 
 @Component({
   selector: 'app-party-fund-details',
@@ -16,6 +17,8 @@ export class PartyFundDetailsComponent implements OnInit {
   titleAlert = 'This field is required';
   fundDetail: FundDetails;
   partyFundCollection: FormGroup;
+  result: ResultData[];
+
   constructor(private _fb: FormBuilder, private _partyService: PartyServiceService,
     private router: Router) {
     this.fundDetails = this._partyService.partyFundArray;
@@ -25,14 +28,17 @@ export class PartyFundDetailsComponent implements OnInit {
     this.isEditable = false;
     let data = this._partyService.storageEl;
     if (data) {
+      this.isEditable = true;
       this.formInit(data);
     } else {
+      this.isEditable = false;
     this.formInit({});
   }
 }
 
   formInit(fundData) {
     this.partyFundCollection = this._fb.group({
+      FundID: [fundData.FundID || ''],
       Date: [fundData.Date || '', Validators.required],
       FundType: [fundData.FundType || '', Validators.required],
       PaidBy: [fundData.PaidBy || '', Validators.required],
@@ -41,18 +47,55 @@ export class PartyFundDetailsComponent implements OnInit {
       ProviderBankName: [fundData.ProviderBankName || '', Validators.required],
       ProviderName: [fundData.ProviderName || '', Validators.required],
       ProviderMobileNo: [fundData.ProviderMobileNo || '', Validators.required],
-      Address: [fundData.Address || '', Validators.required]
+      Address: [fundData.Address || '', Validators.required],
+      IsActive: [fundData.IsActive || ''],
+      MobileNo: [fundData.MobileNo || ''],
+      TokenId: [fundData.TokenId || ''],
+      MobId: [fundData.MobId || '']
     });
   }
 
   insertPartyFundDetail(fundDetails) {
-    fundDetails.MobileNo = '';
-    fundDetails.TokenId = '';
-    console.log(fundDetails);
-    fundDetails.FundID = 3;
-    fundDetails.IsActive = 0;
-    this.fundDetails = this._partyService.addPartyFundDetails(fundDetails);
-    this.router.navigateByUrl('/pages/partyfundtable');
+    if (fundDetails.FundID == '' || fundDetails.FundID == null) {
+      fundDetails.MobileNo = '7741909862';
+      fundDetails.TokenId = 'D29D522E-F95B-4191-BF73-440C196177B1';
+      fundDetails.MobId = '0';
+      fundDetails.IsActive = 1;
+      this._partyService.addPartyFundDetails(fundDetails).subscribe(data => {
+        this.result = data;
+        if (this.result[0].Status == '106') {
+          swal({title: 'Success!!!',
+                text: 'Party Fund Data Inserted Successfully!!!',
+                icon: 'success'}).then((value) => {
+                  if (value) {
+                    this.router.navigateByUrl('/pages/partyfundtable');
+                  }
+                });
+                this.partyFundCollection.reset();
+        } else {
+          swal('Sorry!!!', 'Party Fund Data Insertion Failed!!!', 'error');
+        }
+      });
+    } else {
+      fundDetails.MobileNo = '7741909862';
+      fundDetails.TokenId = 'D29D522E-F95B-4191-BF73-440C196177B1';
+      console.log(fundDetails);
+      this._partyService.addPartyFundDetails(fundDetails).subscribe(data => {
+        this.result = data;
+        if (this.result[0].Status == '106') {
+          swal({title: 'Success!!!',
+                text: 'Party Fund Data Updated Successfully!!!',
+                icon: 'success'}).then((value) => {
+                  if (value) {
+                    this.router.navigateByUrl('/pages/partyfundtable');
+                  }
+                });
+                this.partyFundCollection.reset();
+        } else {
+          swal('Sorry!!!', 'Party Fund Data Updation Failed!!!', 'error');
+        }
+      });
+    }
   }
 
   // editFund(fundId: number) {

@@ -25,16 +25,13 @@ import { PartyFundTableComponent } from 'app/admin-view/internal-pages/party-fun
 import { AddPartyCandidateComponent } from 'app/admin-view/internal-pages/add-party-candidate/add-party-candidate.component';
 import { PartyCandidateTableComponent } from 'app/admin-view/internal-pages/party-candidate-table/party-candidate-table.component';
 import { UploadStandardRatesComponent } from 'app/admin-view/internal-pages/upload-standard-rates/upload-standard-rates.component';
-import { PartyAdditionComponent } from 'app/admin-view/internal-pages/party-addition/party-addition.component';
-import { PartyTableComponent } from 'app/admin-view/internal-pages/party-table/party-table.component';
-import { PartyRepresentativeComponent } from 'app/admin-view/internal-pages/party-representative/party-representative.component';
-import { PartyRepresentativeTableComponent } from 'app/admin-view/internal-pages/party-representative-table/party-representative-table.component';
-import { UploadDownloadExpenseComponent } from 'app/admin-view/internal-pages/upload-download-expense/upload-download-expense.component';
-import { OtpPasswordComponent } from 'app/admin-view/internal-pages/otp-password/otp-password.component';
-import { AddOffersComponent } from 'app/admin-view/internal-pages/add-offers/add-offers.component';
-import { VoterStatusReportComponent } from 'app/admin-view/internal-pages/voter-status-report/voter-status-report.component';
-import { AddOffersTableComponent } from 'app/admin-view/internal-pages/add-offers-table/add-offers-table.component';
-import { DetailsReportCountComponent } from 'app/admin-view/internal-pages/details-report-count/details-report-count.component';
+import { DynamicMessagingComponent } from 'app/admin-view/internal-pages/dynamic-messaging/dynamic-messaging.component';
+import { NominationDailyComponent } from 'app/admin-view/internal-pages/nomination-daily/nomination-daily.component';
+import { NominationReportsComponent } from 'app/admin-view/internal-pages/nomination-reports/nomination-reports.component';
+import { AddNewsComponent } from 'app/admin-view/internal-pages/add-news/add-news.component';
+import { AddNewsTableComponent } from 'app/admin-view/internal-pages/add-news-table/add-news-table.component';
+import { DiscrepencyReportComponent } from 'app/admin-view/internal-pages/discrepency-report/discrepency-report.component';
+import { ExpenseReportComponent } from 'app/admin-view/internal-pages/expense-report/expense-report.component';
 
 const routes: Routes = [{
     path: '',
@@ -163,11 +160,11 @@ const routes: Routes = [{
             }
         },
         {
-            path: 'deviation',
+            path: 'deviationreport',
             component: DeviationComponent,
             canActivate: [AuthGaurdService],
             data: {
-                title: 'Deviation'
+                title: 'Deviation Report'
             }
         },
         {
@@ -235,84 +232,60 @@ const routes: Routes = [{
             },
         },
         {
-            path: 'party-addition',
-            component: PartyAdditionComponent,
+            path: 'dynamicmessaging',
+            component: DynamicMessagingComponent,
             canActivate: [AuthGaurdService],
             data: {
-                title: 'Add Party'
-            }
+                title: 'Dynamic Messaging'
+            },
         },
         {
-            path: 'party-table',
-            component: PartyTableComponent,
+            path: 'nominationdaily',
+            component: NominationDailyComponent,
             canActivate: [AuthGaurdService],
             data: {
-                title: 'Party Table'
-            }
+                title: 'Nomination Daily Message'
+            },
         },
         {
-            path: 'party-representative',
-            component: PartyRepresentativeComponent,
+            path: 'nominationreports',
+            component: NominationReportsComponent,
             canActivate: [AuthGaurdService],
             data: {
-                title: 'party representative'
-            }
+                title: 'Nomination Reports'
+            },
         },
         {
-            path: 'party-representative-table',
-            component: PartyRepresentativeTableComponent,
+            path: 'addnews',
+            component: AddNewsComponent,
             canActivate: [AuthGaurdService],
             data: {
-                title: 'party representative table'
-            }
+                title: 'Add News'
+            },
         },
         {
-            path: 'upload-Download-Expense',
-            component: UploadDownloadExpenseComponent,
+            path: 'addnewstable',
+            component: AddNewsTableComponent,
             canActivate: [AuthGaurdService],
             data: {
-                title: 'uploadDownloadExpense'
-            }
+                title: 'Add News Table'
+            },
         },
         {
-            path: 'otp-password',
-            component: OtpPasswordComponent,
+            path: 'discrepencyreport',
+            component: DiscrepencyReportComponent,
             canActivate: [AuthGaurdService],
             data: {
-                title: 'otp password'
-            }
+                title: 'Discrepency Report'
+            },
         },
         {
-            path: 'addOffers',
-            component: AddOffersComponent,
+            path: 'expensereport',
+            component: ExpenseReportComponent,
             canActivate: [AuthGaurdService],
             data: {
-                title: 'offers'
-            }
-        },
-        {
-            path: 'voterStatusReport',
-            component: VoterStatusReportComponent,
-            canActivate: [AuthGaurdService],
-            data: {
-                title: 'voterStatusReport'
-            }
-        },
-        {
-            path: 'addOfferTable',
-            component: AddOffersTableComponent,
-            canActivate: [AuthGaurdService],
-            data: {
-                title: 'addOfferTable'
-            }
-        },
-        {
-            path: 'reportCount',
-            component: DetailsReportCountComponent,
-            canActivate: [AuthGaurdService],
-            data: {
-                title: 'reportCount'
-            }
+                title: 'Expense Report'
+            },
         }
     ]
 }];

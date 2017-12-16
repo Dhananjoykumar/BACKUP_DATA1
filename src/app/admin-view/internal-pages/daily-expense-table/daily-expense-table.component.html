@@ -16,7 +16,7 @@
           <div class="form-group row">
             <!-- [formGroup]="searchExpenseData" -->
             <div class="col-md-3">
-              <input type="text" name="expenseid" id="expenseid" class="form-control" placeholder="Enter Expense Id">
+              <input type="text" name="expenseid" id="expenseid" class="form-control" placeholder="Enter Expense Id" (keypress)="_keyPress($event)">
             </div>
             <div class="col-md-3">
               <input type="date" name="fromdate" id="fromdate" class="form-control" placeholder="From Date">
@@ -38,10 +38,10 @@
                 <!-- <input type="checkbox" *ngIf="exp.IsPrinted == 1" name="selectAll" value="select" disabled> -->
               <!-- </th> -->
               <th>Id</th>
-              <th>Date</th>
+              <th width="100px">Date</th>
               <th>Expense Type</th>
               <th>Sub Expense Type</th>
-              <th>Oty</th>
+              <th>Qty</th>
               <th>Rate</th>
               <th>Total Expense</th>
               <th>Pay Mode</th>
@@ -57,7 +57,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let exp of expenses | paginate: {itemsPerPage: 5, currentPage:page, id: '1'};let i = index">
+            <tr *ngFor="let exp of expenses | paginate: {itemsPerPage: 10, currentPage:page, id: '1'};let i = index">
               <!-- <td><input type="checkbox" [(ngModel)]="exp.selected" name="select" (click)="checkIfAllSelected()"></td> -->
               <!-- <td>
                 <input type="checkbox" *ngIf="exp.IsPrinted == 0" id="childCheck" [(ngModel)]="exp.state" (change)="uncheckData(exp.serverId)"> -->
@@ -65,18 +65,26 @@
                 <!-- <input type="checkbox" *ngIf="exp.IsPrinted == 1" id="select" name="selectAll" value="select" disabled>
               </td> -->
               <td>{{exp.serverId}}</td>
-              <td>{{exp.Date}}</td>
+              <td *ngIf="exp.Date === '0'"></td>
+              <td *ngIf="exp.Date !== '0'">{{exp.Date | date: 'dd-MM-yyyy'}}</td>
               <td class="wraptext" id="expType" (mouseenter)="hoverData([exp.ExpensesType])">{{exp.ExpenseTypeText}}</td>
               <td>{{exp.SubExpenseTypeText}}</td>
-              <td>{{exp.Qty_Size_Area}}</td>
-              <td>{{exp.Rate}}</td>
-              <td>{{exp.TotalExpense}}</td>
+              <td *ngIf="exp.Qty_Size_Area === '0'"></td>
+              <td *ngIf="exp.Qty_Size_Area !== '0'">{{exp.Qty_Size_Area}}</td>
+              <td *ngIf="exp.Rate == '0'"></td>
+              <td *ngIf="exp.Rate != '0'">{{exp.Rate}}</td>
+              <td *ngIf="exp.TotalExpense == '0'"></td>
+              <td *ngIf="exp.TotalExpense != '0'">{{exp.TotalExpense}}</td>
               <td>{{exp.PaymentModeText}}</td>
               <td>{{exp.PaidAmount}}</td>
-              <td>{{exp.InvoiceNo}}</td>
-              <td>{{exp.FirmName}}</td>
-              <td>{{exp.SourceOfExpense}}</td>
-              <td>{{exp.CandidateRole}}</td>
+              <td *ngIf="exp.InvoiceNo === '0'"></td>
+              <td *ngIf="exp.InvoiceNo !== '0'">{{exp.InvoiceNo}}</td>
+              <td *ngIf="exp.FirmName === '0'"></td>
+              <td *ngIf="exp.FirmName !== '0'">{{exp.FirmName}}</td>
+              <td *ngIf="exp.SourceOfExpense === '0'"></td>
+              <td *ngIf="exp.SourceOfExpense !== '0'">{{exp.SourceOfExpense}}</td>
+              <td *ngIf="exp.CandidateRole === '0'"></td>
+              <td *ngIf="exp.CandidateRole !== '0'">{{exp.CandidateRole}}</td>
               <td id="action" *ngIf="exp.IsPrinted == 0">
 
                 <!-- <button *ngIf="exp.IsApproved == 0" type="submit"> -->

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ExtraDetails } from 'app/admin-view/models/extraDetails';
 import { ExpenseService } from 'app/admin-view/shared/expense.service';
 import { PartyServiceService } from 'app/admin-view/shared/party-service.service';
 import { Router } from '@angular/router';
-import { Validators } from '@angular/forms/src/validators';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-add-party-candidate',
@@ -14,6 +14,7 @@ import { Validators } from '@angular/forms/src/validators';
 export class AddPartyCandidateComponent implements OnInit {
 
   isEditable: boolean;
+  date: Date;
   addPartyCandidate: FormGroup;
   extraDetail: ExtraDetails;
   counter: number;
@@ -80,5 +81,16 @@ export class AddPartyCandidateComponent implements OnInit {
 
   cancelData() {
     this.router.navigateByUrl('/pages/partycandidatetable');
+  }
+
+  checkElectionDate() {
+    let data = this.addPartyCandidate.controls['ElectionDate'].value;
+
+    this.date = new Date(moment(data).format('YYYY-MM-DD'));
+
+    if (this.date < new Date()) {
+      swal('Sorry!!!', 'You cannot select back dated Election Date!!!', 'error');
+      this.addPartyCandidate.controls['ElectionDate'].setValue('');
+    }
   }
 }

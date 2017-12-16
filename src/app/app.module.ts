@@ -40,7 +40,8 @@ import { AuthGaurdService } from 'app/admin-view/shared/auth-gaurd.service';
 import { SessionService } from 'app/admin-view/shared/session.service';
 import { ControlChartService } from 'app/admin-view/shared/controlChart.service';
 import { PartyServiceService } from 'app/admin-view/shared/party-service.service';
-import { AddOffersService } from 'app/admin-view/shared/add-offers.service';
+import { NewsService } from 'app/admin-view/shared/news.service';
+import { ReportsService } from 'app/admin-view/shared/reports.service';
 // import { LoginComponent } from './login/login.component';
 // import { AdminViewComponent } from './admin-view/admin-view.component';
 
@@ -55,7 +56,6 @@ import { AddOffersService } from 'app/admin-view/shared/add-offers.service';
     CommonModule,
     FormsModule,
     NgIdleKeepaliveModule.forRoot()
-    
   ],
   declarations: [
     AppComponent,
@@ -85,7 +85,8 @@ import { AddOffersService } from 'app/admin-view/shared/add-offers.service';
   SessionService,
   ControlChartService,
   PartyServiceService,
-  AddOffersService
+  NewsService,
+  ReportsService
 ],
   bootstrap: [ AppComponent ]
 })
